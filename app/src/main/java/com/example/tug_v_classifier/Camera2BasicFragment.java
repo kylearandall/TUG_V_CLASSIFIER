@@ -215,7 +215,7 @@ public class Camera2BasicFragment extends Fragment
         }
     }
 
-    /*Shows button when classifying is done*/
+    /**Shows button when classifying is done*/
     
     private void showButton(){
         final Activity activity = getActivity();
@@ -471,15 +471,6 @@ public class Camera2BasicFragment extends Fragment
         }
     }
 
-    private void runClassifier(){
-        results = new ArrayList<>();
-        startBackgroundThread();
-        if(results.size()==20){
-            stopBackgroundThread();
-            getFinalResult();
-            showToast("Final Result is "+finalResult);
-        }
-    }
 
 
     private String[] getRequiredPermissions() {
@@ -730,19 +721,41 @@ public class Camera2BasicFragment extends Fragment
         Bitmap bitmap =
                 textureView.getBitmap(ImageClassifier.DIM_IMG_SIZE_X, ImageClassifier.DIM_IMG_SIZE_Y);
         String textToShow = classifier.classifyFrame(bitmap);
-        showToast(textToShow);
+        showToast("Classifying");
         results.add(textToShow);
         bitmap.recycle();
         if(results.size()==20){
             getFinalResult();
             runClassifier=false;
-            showButton();
+            if(finalResult.equals("Inconclusive")){
+                inconclusiveDialogBox();
+            }else{
+                showButton();
+            }
         }
-
-
-
-
     }
+
+    private void inconclusiveDialogBox(){
+        final android.support.v7.app.AlertDialog.Builder builderSingle = new android.support.v7.app.AlertDialog.Builder(getContext());
+        builderSingle.setTitle(R.string.inconclusiveboxtitle);
+        builderSingle.setMessage(R.string.incorretdialogtext);
+
+        builderSingle.setPositiveButton(R.string.scanagain, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent scanAgain = new Intent(getContext(), LaunchClassifier.class);
+                startActivity(scanAgain);
+            }
+        });
+
+        builderSingle.setNegativeButton(R.string.setmanually, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //TODO Add intent to set manual screen
+            }
+        });
+    }
+
 
     private void getFinalResult(){
         ArrayList<String> a = new ArrayList<String>();

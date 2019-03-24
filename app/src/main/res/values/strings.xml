@@ -29,4 +29,10 @@
     <string name="returntomenu">Return to Main Menu</string>
     <string name="scanagaintitle">Scan Again?</string>
     <string name="scanagaintext">This will reset the identifier and scan again. Proceed?</string>
+    <string name="incorrectdialogtitle">Admin Approval Required</string>
+    <string name="incorretdialogtext">This action requires admin approval. Proceed?</string>
+    <string name="inconclusiveboxtitle">Inconclusive Result</string>
+    <string name="inconsluiveboxtext">Please scan again or set towing class manually.</string>
+    <string name="scanagain">Scan Again</string>
+    <string name="setmanually">Set Manually</string>
 </resources>

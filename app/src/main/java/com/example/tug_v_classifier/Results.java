@@ -48,6 +48,13 @@ public class Results extends AppCompatActivity {
             }
         });
 
+        incorrect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                incorrectDialogBox();
+            }
+        });
+
 
     }
 
@@ -136,6 +143,28 @@ public class Results extends AppCompatActivity {
         builderSingle.show();
 
     }
+
+    private void incorrectDialogBox(){
+        final android.support.v7.app.AlertDialog.Builder builderSingle = new android.support.v7.app.AlertDialog.Builder(this);
+        builderSingle.setTitle(R.string.incorrectdialogtitle);
+        builderSingle.setMessage(R.string.incorretdialogtext);
+
+        builderSingle.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //TODO add admin authentication for approval.
+
+            }
+        });
+        builderSingle.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builderSingle.show();
+    }
+
 
 
 }
