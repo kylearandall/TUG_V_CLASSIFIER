@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">TUG_V_CLASSIFIER</string>
+    <string name="loginusername">User Name</string>
+    <string name="loginpassword">Password</string>
+    <string name="loginbutton">Log In</string>
+    <string name="IDbutton">Launch Classifier</string>
+    <string name="userlogbutton">User Log</string>
+    <string name="launchertext">Please Make Sure Aircraft is in Camera View Before Launching</string>
+    <string name="launchbutton">Launch</string>
+    <string name="picture">Picture</string>
+    <string name="description_info">Info</string>
+    <string name="request_permission">This sample needs camera permission.</string>
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
+    <string name="toggle_turn_on">NN:On</string>
+    <string name="toggle_turn_off">NN:Off</string>
+    <string name="toggle">Use NNAPI</string>
+    <string name="locationheader">Your Current Location Is:</string>
+    <string name="next">Next</string>
+    <string name="resultsheader">Identified Towing Class:</string>
+    <string name="settowingclass">Set Towing Class</string>
+    <string name="incorrectbutton">Incorrect Classificaiton</string>
+    <string name="scanagainbutton">Scan Again</string>
+    <string name="setDialogboxtitle">Set Towing Class: </string>
+    <string name="setDialogboxmessage">Set Towing Class to Identified Setting?</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
+    <string name="classissetdialogboxtitle">Towing Class Set</string>
+    <string name="classissetdialogboxtext">The towing class has been set to </string>
+    <string name="returntomenu">Return to Main Menu</string>
+    <string name="scanagaintitle">Scan Again?</string>
+    <string name="scanagaintext">This will reset the identifier and scan again. Proceed?</string>
+</resources>
