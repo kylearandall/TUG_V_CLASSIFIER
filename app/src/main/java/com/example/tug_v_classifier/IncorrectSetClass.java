@@ -126,6 +126,7 @@ public class IncorrectSetClass extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 Intent returnToMenu = new Intent(IncorrectSetClass.this, MainMenu.class);
                 startActivity(returnToMenu);
+                //TODO Insert code to write usage to database
             }
         });
         builder.show();

@@ -18,7 +18,7 @@
     <string name="next">Next</string>
     <string name="resultsheader">Identified Towing Class:</string>
     <string name="settowingclass">Set Towing Class</string>
-    <string name="incorrectbutton">Incorrect Classificaiton</string>
+    <string name="incorrectbutton">Incorrect Classification</string>
     <string name="scanagainbutton">Scan Again</string>
     <string name="setDialogboxtitle">Set Towing Class: </string>
     <string name="setDialogboxmessage">Set Towing Class to Identified Setting?</string>
@@ -38,7 +38,9 @@
     <string name="adminloginreq">Admin Login Required to Continue</string>
     <string name="goback">Go Back</string>
     <string name="incorrectclassificationlogtitle">Incorrect Classification</string>
+    <string name="inconclusiveclassificatoinlogtitle">Inconclusive Classification</string>
     <string name="selectfactorstitle">Please select factors that may have contributed to incorrect classification</string>
+    <string name="inconclusiveselectfactorstitle">Please select factors that may have contributed to an inconclusive classification</string>
     <string name="night">Night</string>
     <string name="overcast">Overcast</string>
     <string name="rain">Rain</string>
@@ -65,4 +67,6 @@
     <string name="correctclassboxtitle">Set Recommended Towing Class?</string>
     <string name="correctclassboxline1"> was the System Recommended Towing Class.</string>
     <string name="correctclassboxline2">Would you like to set the Recommended Towing Class and log a Correctly Identified Result?</string>
+    <string name="inconclusivesetboxline1">This will manually set the Towing Class to </string>
+    <string name="inconclusivesetboxline2">Proceed?</string>
 </resources>

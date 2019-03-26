@@ -714,6 +714,8 @@ public class Camera2BasicFragment extends Fragment
         if(results.size()==20){
             getFinalResult();
             runClassifier=false;
+            //testing code to test inconclusive use case. Remove before demonstration
+            //finalResult="Inconclusive";
             if(finalResult.equals("Inconclusive")){
                 showToast("Inconclusive Result");
                 inconclusiveDialogBox();
@@ -727,7 +729,7 @@ public class Camera2BasicFragment extends Fragment
     private void inconclusiveDialogBox(){
         final android.support.v7.app.AlertDialog.Builder builderSingle = new android.support.v7.app.AlertDialog.Builder(getContext());
         builderSingle.setTitle(R.string.inconclusiveboxtitle);
-        builderSingle.setMessage(R.string.incorretdialogtext);
+        builderSingle.setMessage(R.string.inconsluiveboxtext);
 
         builderSingle.setPositiveButton(R.string.scanagain, new DialogInterface.OnClickListener() {
             @Override
@@ -741,8 +743,11 @@ public class Camera2BasicFragment extends Fragment
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //TODO Add intent to set manual screen
+                Intent setInconclusiveResult = new Intent(getContext(), InconclusiveResultLog.class);
+                startActivity(setInconclusiveResult);
             }
         });
+        builderSingle.show();
     }
 
 
