@@ -26,8 +26,13 @@ public class Results extends AppCompatActivity {
         result = (TextView)findViewById(R.id.resulttv);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        sResult = bundle.getString("result");
-        getResultCharacter(sResult);
+        if(bundle.getString("result")!=null){
+            sResult = bundle.getString("result");
+            getResultCharacter(sResult);
+        }else{
+            charResult = bundle.getString("recResult");
+
+        }
         result.setText(charResult);
         String buttonText = getResources().getString(R.string.settowingclass)+": "+charResult;
 
@@ -74,9 +79,6 @@ public class Results extends AppCompatActivity {
                 break;
             case "cate":
                 charResult="E";
-                break;
-            case "Inconclusive":
-                charResult="Inconclusive";
                 break;
         }
     }
@@ -153,6 +155,11 @@ public class Results extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //TODO add admin authentication for approval.
+                Bundle bundle = new Bundle();
+                bundle.putString("recResult", charResult);
+                Intent adminLogIn = new Intent(Results.this, AdminOverrideLogIn.class);
+                adminLogIn.putExtras(bundle);
+                startActivity(adminLogIn);
 
             }
         });

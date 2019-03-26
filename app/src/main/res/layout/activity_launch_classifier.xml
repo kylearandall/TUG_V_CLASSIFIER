@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Space
-            android:id="@+id/topspace"
+            android:id="@+id/midspace"
             android:layout_width="match_parent"
             android:layout_height="75dp" />
 

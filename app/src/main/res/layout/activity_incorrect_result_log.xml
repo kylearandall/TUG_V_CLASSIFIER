@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".IncorrectResultLog">
+
+
+    <LinearLayout
+        android:id="@+id/incorrecttitle"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/incorrecttitletext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/incorrectclassificationlogtitle"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/classchar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/incorrecttitle"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="1"
+        android:text="@string/resultsheader"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <Space
+        android:id="@+id/midspace"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/classchar" />
+
+    <TextView
+        android:id="@+id/instructiontext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/midspace"
+        android:layout_centerHorizontal="true"
+        android:text="@string/selectfactorstitle"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/checkboxcontainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/instructiontext"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/checkboxcolumn1"
+            android:layout_width="136dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Space
+                android:id="@+id/colum1space"
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <CheckBox
+                android:id="@+id/nightbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/night"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/overcastbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/overcast"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/rainbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rain"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/snowbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/snow"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/hailbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hail"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/otherbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/other"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/checkboxcolum2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Space
+                android:id="@+id/column2space"
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <CheckBox
+                android:id="@+id/distortedcambox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/distortedcam"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/camofflinebox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cameraoffline"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/dirtycambox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dirtycam"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/incorrectcamposbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/campositionincorrectly"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/unusualtirebox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tireshape"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/unknownbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/unknown"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/savebutton"
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:text="@string/save" />
+
+</RelativeLayout>

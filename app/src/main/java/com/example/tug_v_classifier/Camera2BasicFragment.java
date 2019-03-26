@@ -602,11 +602,7 @@ public class Camera2BasicFragment extends Fragment
                 public void run() {
                     synchronized (lock) {
                         if (runClassifier) {
-                            try {
                                 classifyFrame();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
                         }
                     }
                     backgroundHandler.post(periodicClassify);
@@ -704,20 +700,11 @@ public class Camera2BasicFragment extends Fragment
     }
 
     /** Classifies a frame from the preview stream. */
-    private void classifyFrame() throws InterruptedException {
+    private void classifyFrame() {
         if (classifier == null || getActivity() == null || cameraDevice == null) {
             showToast("Uninitialized Classifier or invalid context.");
             return;
         }
-
-        /*Bitmap bitmap =
-                textureView.getBitmap(ImageClassifier.DIM_IMG_SIZE_X, ImageClassifier.DIM_IMG_SIZE_Y);
-        String textToShow = classifier.classifyFrame(bitmap);
-        bitmap.recycle();
-        showToast(textToShow);*/
-
-
-
         Bitmap bitmap =
                 textureView.getBitmap(ImageClassifier.DIM_IMG_SIZE_X, ImageClassifier.DIM_IMG_SIZE_Y);
         String textToShow = classifier.classifyFrame(bitmap);
@@ -728,8 +715,10 @@ public class Camera2BasicFragment extends Fragment
             getFinalResult();
             runClassifier=false;
             if(finalResult.equals("Inconclusive")){
+                showToast("Inconclusive Result");
                 inconclusiveDialogBox();
             }else{
+                Toast.makeText(getContext(), "Classification Complete!", Toast.LENGTH_SHORT).show();
                 showButton();
             }
         }

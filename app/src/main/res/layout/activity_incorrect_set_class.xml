@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".IncorrectSetClass">
+
+    <LinearLayout
+        android:id="@+id/incorrecttitle"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/incorrecttitletext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/incorrectclassificationlogtitle"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/classchar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/incorrecttitle"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="1"
+        android:text="@string/resultsheader"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <Space
+        android:id="@+id/midspace"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/classchar" />
+
+    <TextView
+        android:id="@+id/instructiontext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/midspace"
+        android:layout_centerHorizontal="true"
+        android:text="@string/incorrectsettext"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/buttoncontainter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/instructiontext"
+        android:orientation="vertical"
+        android:weightSum="100">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_weight="2" />
+
+        <Button
+            android:id="@+id/abutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:text="@string/setclassA" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_weight="2" />
+
+        <Button
+            android:id="@+id/bbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:text="@string/setclassB" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_weight="2" />
+
+        <Button
+            android:id="@+id/cbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:text="@string/setclassC" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_weight="2" />
+
+        <Button
+            android:id="@+id/dbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:text="@string/setclassD" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_weight="2" />
+
+        <Button
+            android:id="@+id/ebutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:text="@string/setclassE" />
+
+    </LinearLayout>
+
+</RelativeLayout>

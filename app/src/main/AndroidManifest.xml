@@ -25,7 +25,11 @@
         <activity android:name=".LaunchClassifier" />
         <activity android:name=".Classifier" />
         <activity android:name=".CameraClassifier" />
-        <activity android:name=".Results"></activity>
+        <activity android:name=".Results" />
+        <activity android:name=".AdminOverrideLogIn" />
+        <activity android:name=".IncorrectResultLog" />
+        <activity android:name=".OtherUnknownLog" />
+        <activity android:name=".IncorrectSetClass"></activity>
     </application>
 
 </manifest>
