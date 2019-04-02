@@ -69,4 +69,10 @@
     <string name="correctclassboxline2">Would you like to set the Recommended Towing Class and log a Correctly Identified Result?</string>
     <string name="inconclusivesetboxline1">This will manually set the Towing Class to </string>
     <string name="inconclusivesetboxline2">Proceed?</string>
+    <string name="unknownotherboxtitle">More Info Needed</string>
+    <string name="unknownotherbottext">You selected Other or Unknown from the list of factors. Please input any relevant information about the cause of this result below.</string>
+    <string name="continuebutton">Continue</string>
+    <string name="locationerror">Error finding Location. Please Restart Application.</string>
+    <string name="locating">Locating. Please Wait.</string>
+    <string name="locationpermissiondenied">Location Permissions have been denied. Please approve location permissions before continuing.</string>
 </resources>

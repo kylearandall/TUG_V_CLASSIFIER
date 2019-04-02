@@ -1,12 +1,15 @@
 package com.example.tug_v_classifier;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class IncorrectResultLog extends AppCompatActivity {
     private String charResult;
@@ -54,10 +57,7 @@ public class IncorrectResultLog extends AppCompatActivity {
                 Bundle result1 = new Bundle();
                 result1.putString("result", charResult);
                 if(unknown.isChecked()||other.isChecked()) {
-                    Intent otherInput = new Intent(IncorrectResultLog.this, OtherUnknownLog.class);
-                    otherInput.putExtras(result1);
-                    startActivity(otherInput);
-
+                    otherUnknownBox(result1);
                 }else{
                     Intent saveFactors = new Intent(IncorrectResultLog.this, IncorrectSetClass.class);
                     saveFactors.putExtras(result1);
@@ -65,8 +65,38 @@ public class IncorrectResultLog extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void otherUnknownBox(Bundle result){
+        final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setTitle(R.string.unknownotherboxtitle);
+        builder.setMessage(R.string.unknownotherbottext);
+        EditText boxInput = new EditText(this);
+        builder.setView(boxInput);
+
+        builder.setPositiveButton(R.string.continuebutton, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(boxInput.getText().toString().isEmpty()){
+                    Toast.makeText(getApplicationContext(),"Please Fill in Form", Toast.LENGTH_SHORT).show();
 
 
+                }else{
+                    Intent otherInput = new Intent(IncorrectResultLog.this, IncorrectSetClass.class);
+                    otherInput.putExtras(result);
+                    startActivity(otherInput);
+                }
+            }
+        });
+
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        builder.show();
 
     }
 }
