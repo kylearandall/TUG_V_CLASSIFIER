@@ -79,7 +79,9 @@ public class Camera2BasicFragment extends Fragment
 
     private ArrayList<String> results;
     private String finalResult;
-    Button nextButton;
+    private Button nextButton;
+    private String date;
+    private String location;
 
     /** Max preview width that is guaranteed by Camera2 API */
     private static final int MAX_PREVIEW_WIDTH = 1920;
@@ -306,11 +308,16 @@ public class Camera2BasicFragment extends Fragment
         textureView = (AutoFitTextureView) view.findViewById(R.id.texture);
         textView = (TextView) view.findViewById(R.id.text);
         nextButton = (Button)view.findViewById(R.id.nextbutton);
+        CameraClassifier activity = (CameraClassifier)getActivity();
+        location = activity.getLocation();
+        date = activity.getDate();
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString("result", finalResult);
+                bundle.putString("location", location);
+                bundle.putString("date", date);
                 Intent results = new Intent(getContext(), Results.class);
                 results.putExtras(bundle);
                 startActivity(results);

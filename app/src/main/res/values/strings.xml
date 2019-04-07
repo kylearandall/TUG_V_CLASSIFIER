@@ -75,4 +75,6 @@
     <string name="locationerror">Error finding Location. Please Restart Application.</string>
     <string name="locating">Locating. Please Wait.</string>
     <string name="locationpermissiondenied">Location Permissions have been denied. Please approve location permissions before continuing.</string>
+    <string name="mainmenu">Main Menu</string>
+    <string name="searchbutton">Search User Log</string>
 </resources>

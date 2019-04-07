@@ -25,6 +25,14 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
+        userLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent uLog = new Intent(MainMenu.this, UserLog.class);
+                startActivity(uLog);
+            }
+        });
+
 
     }
 }

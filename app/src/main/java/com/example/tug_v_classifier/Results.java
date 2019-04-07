@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class Results extends AppCompatActivity {
     TextView result;
     String sResult;
-    String charResult;
+    String charResult, date, location, resultStatus, userName;
     Button set, incorrect, scanAgain;
 
     @Override
@@ -34,6 +34,8 @@ public class Results extends AppCompatActivity {
 
         }
         result.setText(charResult);
+        location = bundle.getString("location");
+        date = bundle.getString("date");
         String buttonText = getResources().getString(R.string.settowingclass)+": "+charResult;
 
         set.setText(buttonText);
@@ -114,6 +116,7 @@ public class Results extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent menu = new Intent(Results.this, MainMenu.class);
+                resultStatus = "Correct";
                 //TODO Add code to write usage to database.
                 startActivity(menu);
             }
@@ -155,8 +158,12 @@ public class Results extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //TODO add admin authentication for approval.
+                resultStatus = "Incorrect";
                 Bundle bundle = new Bundle();
                 bundle.putString("recResult", charResult);
+                bundle.putString("resultStatus", resultStatus);
+                bundle.putString("date", date);
+                bundle.putString("location", location);
                 Intent adminLogIn = new Intent(Results.this, AdminOverrideLogIn.class);
                 adminLogIn.putExtras(bundle);
                 startActivity(adminLogIn);

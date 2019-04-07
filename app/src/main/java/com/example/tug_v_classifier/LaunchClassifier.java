@@ -23,8 +23,10 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 
 import com.google.android.libraries.places.api.model.Place;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -32,14 +34,17 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class LaunchClassifier extends AppCompatActivity {
 
-    private static final String TAG = "LaunchClassifier";
+    private static final String TAG = "LaunchClassifier: ";
 
-    Button launch;
-    TextView locationTV;
-    String location;
-    PlacesClient placesClient;
-    ArrayList<String> places;
+    private Button launch;
+    private TextView locationTV;
+    private String location;
+    private PlacesClient placesClient;
+    private ArrayList<String> places;
+    private String dateAndTime;
+    private Date date;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+
 
 
 
@@ -50,6 +55,7 @@ public class LaunchClassifier extends AppCompatActivity {
         locationTV = (TextView)findViewById(R.id.currentlocation);
 
         launch = (Button)findViewById(R.id.launchbutton);
+
 
         places = new ArrayList<>();
 
@@ -88,10 +94,6 @@ public class LaunchClassifier extends AppCompatActivity {
                     LOCATION_PERMISSION_REQUEST_CODE);
             locationTV.setText(getResources().getString(R.string.locationpermissiondenied));
             launch.setVisibility(View.INVISIBLE);
-            // A local method to request required permissions;
-            // See https://developer.android.com/training/permissions/requesting
-            //getLocationPermission();
-
         }
 
 
@@ -101,7 +103,14 @@ public class LaunchClassifier extends AppCompatActivity {
         launch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SimpleDateFormat format = new SimpleDateFormat("MM-dd-yy: HH:mm:ss");
+                date = new Date();
+                dateAndTime = format.format(date);
+                Bundle userInfo = new Bundle();
+                userInfo.putString("location", location);
+                userInfo.putString("date", dateAndTime);
                 Intent launch = new Intent(LaunchClassifier.this, CameraClassifier.class);
+                launch.putExtras(userInfo);
                 startActivity(launch);
             }
         });
