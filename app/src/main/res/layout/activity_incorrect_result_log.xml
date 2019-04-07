@@ -5,13 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".IncorrectResultLog">
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="47dp"
+        app:srcCompat="@drawable/textron"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
 
     <LinearLayout
         android:id="@+id/incorrecttitle"
         android:layout_width="match_parent"
         android:layout_height="43dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_below="@+id/logo">
 
         <TextView
             android:id="@+id/incorrecttitletext"

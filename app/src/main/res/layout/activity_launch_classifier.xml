@@ -6,7 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".LaunchClassifier">
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="47dp"
+        app:srcCompat="@drawable/textron"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
     <LinearLayout
+        android:layout_below="@+id/logo"
         android:layout_width="match_parent"
         android:layout_height="503dp"
         android:layout_alignParentBottom="true"
@@ -20,7 +29,7 @@
         <Space
             android:id="@+id/midspace"
             android:layout_width="match_parent"
-            android:layout_height="75dp" />
+            android:layout_height="200dp" />
 
         <TextView
             android:id="@+id/launchertext"

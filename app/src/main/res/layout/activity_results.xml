@@ -6,26 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".Results">
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="47dp"
+        app:srcCompat="@drawable/textron"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
     <TextView
         android:id="@+id/resulttv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="71dp"
+        android:layout_marginTop="81dp"
         android:text="TextView"
         android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        />
 
     <TextView
         android:id="@+id/header"
         android:layout_width="wrap_content"
-        android:layout_height="41dp"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/resulttv"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="-71dp"
         android:text="@string/resultsheader"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:layout_below="@+id/logo"/>
 
     <Button
         android:id="@+id/incorrectbutton"
