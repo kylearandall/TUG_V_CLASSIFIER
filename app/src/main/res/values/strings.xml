@@ -77,4 +77,7 @@
     <string name="locationpermissiondenied">Location Permissions have been denied. Please approve location permissions before continuing.</string>
     <string name="mainmenu">Main Menu</string>
     <string name="searchbutton">Search User Log</string>
+    <string name="userheader">User:</string>
+    <string name="dateheader">Date:</string>
+    <string name="location">Location:</string>
 </resources>
