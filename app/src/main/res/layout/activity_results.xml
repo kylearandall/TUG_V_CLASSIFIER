@@ -6,13 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".Results">
 
+    <Space
+        android:id="@+id/topspace"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
     <ImageView
         android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="47dp"
         app:srcCompat="@drawable/textron"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteY="0dp"
+        android:layout_below="@+id/topspace"/>
 
     <TextView
         android:id="@+id/resulttv"

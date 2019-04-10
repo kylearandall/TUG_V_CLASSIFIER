@@ -57,7 +57,7 @@
 
     <Button
         android:id="@+id/goback"
-        android:layout_width="205dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
