@@ -11,6 +11,8 @@ public class LogIn extends AppCompatActivity {
 
     Button signIn;
     EditText userName, password;
+    private String name;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +23,17 @@ public class LogIn extends AppCompatActivity {
         password = (EditText)findViewById(R.id.passwordinput);
 
 
+
+
         signIn = (Button)findViewById(R.id.signinbutton);
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                name = userName.getText().toString();
+                Bundle sendName = new Bundle();
+                sendName.putString("username", name);
                 Intent login = new Intent(LogIn.this, MainMenu.class);
+                login.putExtras(sendName);
                 startActivity(login);
             }
         });

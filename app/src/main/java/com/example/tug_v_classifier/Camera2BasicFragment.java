@@ -36,6 +36,7 @@ import android.support.v13.app.FragmentCompat;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.view.menu.ShowableListMenu;
+import android.util.Base64;
 import android.util.Log;
 import android.util.Size;
 import android.view.LayoutInflater;
@@ -47,6 +48,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -82,6 +84,8 @@ public class Camera2BasicFragment extends Fragment
     private Button nextButton;
     private String date;
     private String location;
+    private ArrayList<String> pictureStrings;
+
 
     /** Max preview width that is guaranteed by Camera2 API */
     private static final int MAX_PREVIEW_WIDTH = 1920;
@@ -318,6 +322,7 @@ public class Camera2BasicFragment extends Fragment
                 bundle.putString("result", finalResult);
                 bundle.putString("location", location);
                 bundle.putString("date", date);
+                bundle.putStringArrayList("pictures", pictureStrings);
                 Intent results = new Intent(getContext(), Results.class);
                 results.putExtras(bundle);
                 startActivity(results);
@@ -336,6 +341,7 @@ public class Camera2BasicFragment extends Fragment
             Log.e(TAG, "Failed to initialize an image classifier.");
         }
         results = new ArrayList<>();
+        pictureStrings = new ArrayList<>();
         startBackgroundThread();
 
     }
@@ -716,6 +722,8 @@ public class Camera2BasicFragment extends Fragment
                 textureView.getBitmap(ImageClassifier.DIM_IMG_SIZE_X, ImageClassifier.DIM_IMG_SIZE_Y);
         String textToShow = classifier.classifyFrame(bitmap);
         showToast("Classifying");
+        String pic = BitMapToString(bitmap);
+        pictureStrings.add(pic);
         results.add(textToShow);
         bitmap.recycle();
         if(results.size()==20){
@@ -731,6 +739,14 @@ public class Camera2BasicFragment extends Fragment
                 showButton();
             }
         }
+    }
+
+    private String BitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        String temp= Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
     }
 
     private void inconclusiveDialogBox(){

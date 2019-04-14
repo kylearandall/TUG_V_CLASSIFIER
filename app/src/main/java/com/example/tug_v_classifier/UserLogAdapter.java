@@ -35,11 +35,13 @@ public class UserLogAdapter extends ArrayAdapter<UserLogItem> {
         String recClass = getItem(position).getRecClass();
         String setClass = getItem(position).getSetClass();
         String resultStatus = getItem(position).getResultStatus();
+        String pictureStrings = getItem(position).getPictureStrings();
         String adminApprovalName = getItem(position).getAdminApprovedName();
         String otherText = getItem(position).getOtherUnknownText();
-        ArrayList<String> factors = getItem(position).getFactors();
+        String factors = getItem(position).getFactors();
+        int uploaded = getItem(position).isUploaded();
 
-        UserLogItem item = new UserLogItem(userName, date, location, recClass, setClass, resultStatus, adminApprovalName, otherText, factors);
+
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
 

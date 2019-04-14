@@ -42,21 +42,7 @@ public class UserLog extends AppCompatActivity {
 
         //test values for user log
 
-        UserLogItem testOne = new UserLogItem("User A", "02-05-2019: 15:39:19", "Cobb County Airport", "A", "A", "Correct", null, null, null );
 
-        ArrayList<String> testTwoFactors = new ArrayList<>();
-        testTwoFactors.add("Overcast");
-        testTwoFactors.add("Snow");
-        testTwoFactors.add("Dirty Camera");
-        UserLogItem testTwo = new UserLogItem("User B", "02-17-2019: 09:12:57", "Hartsfield-Jackson International Airport", "C", "B", "Incorrect", "Admin A", null, testTwoFactors);
-
-        ArrayList<String>testThreeFactors = new ArrayList<>();
-        testThreeFactors.add("Other");
-        UserLogItem testThree = new UserLogItem("User A", "02-28-2019: 12:35:18", "Cobb County Airport", "N/A", "D", "Inconclusive", null, "New Aircraft type", testThreeFactors);
-
-        userLogItemsList.add(testOne);
-        userLogItemsList.add(testTwo);
-        userLogItemsList.add(testThree);
 
         //end test value code for user log
 

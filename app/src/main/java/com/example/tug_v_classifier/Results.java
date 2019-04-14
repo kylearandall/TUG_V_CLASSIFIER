@@ -13,6 +13,7 @@ public class Results extends AppCompatActivity {
     String sResult;
     String charResult, date, location, resultStatus, userName;
     Button set, incorrect, scanAgain;
+    private UserLogItemDBAdapter userLogItemDBAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,7 @@ public class Results extends AppCompatActivity {
         set = (Button)findViewById(R.id.setbutton);
         incorrect = (Button)findViewById(R.id.incorrectbutton);
         scanAgain = (Button)findViewById(R.id.scanagainbutton);
+        userLogItemDBAdapter = UserLogItemDBAdapter.getUserLogItemDBAdapterInstance(this);
 
 
         result = (TextView)findViewById(R.id.resulttv);
@@ -93,6 +95,8 @@ public class Results extends AppCompatActivity {
         builderSingle.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+
                 classIsSetDialogBox();
             }
         });
@@ -116,8 +120,7 @@ public class Results extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent menu = new Intent(Results.this, MainMenu.class);
-                resultStatus = "Correct";
-                //TODO Add code to write usage to database.
+
                 startActivity(menu);
             }
         });

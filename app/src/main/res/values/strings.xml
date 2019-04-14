@@ -80,4 +80,5 @@
     <string name="userheader">User:</string>
     <string name="dateheader">Date:</string>
     <string name="location">Location:</string>
+    <string name="resultstatusheader">Classification Status:</string>
 </resources>

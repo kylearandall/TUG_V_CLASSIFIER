@@ -4,19 +4,21 @@ import java.util.ArrayList;
 
 public class UserLogItem {
 
-    private String userName, date, location, recClass, setClass, resultStatus, adminApprovedName, otherUnknownText;
-    private ArrayList<String> factors;
+    private String userName, date, location, recClass, setClass, resultStatus, adminApprovedName, otherUnknownText, factors, pictureStrings;
+    private int uploaded;
 
-    public UserLogItem(String userName, String date, String location, String recClass, String setClass, String resultStatus, String adminApprovedName, String otherUnknownText, ArrayList<String> factors) {
+    public UserLogItem(String userName, String date, String location, String recClass, String setClass, String resultStatus, String pictureStrings, String adminApprovedName, String otherUnknownText, String factors, int uploaded) {
         this.userName = userName;
         this.date = date;
         this.location = location;
         this.recClass = recClass;
         this.setClass = setClass;
         this.resultStatus = resultStatus;
+        this.pictureStrings = pictureStrings;
         this.adminApprovedName = adminApprovedName;
         this.otherUnknownText = otherUnknownText;
         this.factors = factors;
+        this.uploaded = uploaded;
     }
 
     public String getUserName() {
@@ -67,6 +69,14 @@ public class UserLogItem {
         this.resultStatus = resultStatus;
     }
 
+    public String getPictureStrings() {
+        return pictureStrings;
+    }
+
+    public void setPictureStrings(String pictureStrings) {
+        this.pictureStrings = pictureStrings;
+    }
+
     public String getAdminApprovedName() {
         return adminApprovedName;
     }
@@ -83,11 +93,19 @@ public class UserLogItem {
         this.otherUnknownText = otherUnknownText;
     }
 
-    public ArrayList<String> getFactors() {
+    public String getFactors() {
         return factors;
     }
 
-    public void setFactors(ArrayList<String> factors) {
+    public void setFactors(String factors) {
         this.factors = factors;
+    }
+
+    public int isUploaded() {
+        return uploaded;
+    }
+
+    public void setUploaded(int uploaded) {
+        this.uploaded = uploaded;
     }
 }
