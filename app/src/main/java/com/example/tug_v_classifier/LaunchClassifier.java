@@ -45,17 +45,7 @@ public class LaunchClassifier extends AppCompatActivity {
     private Date date;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
 
-    public String getLocation(){
-        return location;
-    }
 
-    public String getDateAndTime(){
-        return dateAndTime;
-    }
-
-    public String getUserName(){
-        return userName;
-    }
 
 
 
@@ -70,8 +60,7 @@ public class LaunchClassifier extends AppCompatActivity {
         dateAndTime=null;
         userName=null;
 
-        Intent intent = getIntent();
-        Bundle sentName = intent.getExtras();
+
 
         launch = (Button)findViewById(R.id.launchbutton);
 
@@ -122,6 +111,8 @@ public class LaunchClassifier extends AppCompatActivity {
         launch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = getIntent();
+                Bundle sentName = intent.getExtras();
                 SimpleDateFormat format = new SimpleDateFormat("MM-dd-yy: HH:mm:ss");
                 date = new Date();
                 dateAndTime = format.format(date);
@@ -129,6 +120,7 @@ public class LaunchClassifier extends AppCompatActivity {
                 Bundle userInfo = new Bundle();
                 userInfo.putString("location", location);
                 userInfo.putString("date", dateAndTime);
+                userInfo.putString("username", userName);
                 Intent launch = new Intent(LaunchClassifier.this, CameraClassifier.class);
                 launch.putExtras(userInfo);
                 startActivity(launch);

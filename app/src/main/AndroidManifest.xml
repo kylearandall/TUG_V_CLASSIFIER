@@ -31,6 +31,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service
+            android:name=".PictureConverter"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+            </intent-filter>
+        </service>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCiUDYUKsWDnDfWjNkmuYjpwq4jfBYQBRs" />
@@ -48,8 +57,17 @@
         <activity android:name=".MainMenu" />
         <activity android:name=".LaunchClassifier" />
         <activity android:name=".Classifier" />
-        <activity android:name=".CameraClassifier" />
-        <activity android:name=".Results" />
+        <activity android:name=".CameraClassifier">
+            <intent-filter>
+                <action android:name="android.intent.action.SENDTO"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".Results">
+            <intent-filter>
+                <action android:name="android.intent.action.ANSWER"/>
+            </intent-filter>
+
+        </activity>
         <activity android:name=".AdminOverrideLogIn" />
         <activity android:name=".IncorrectResultLog" />
         <activity android:name=".OtherUnknownLog" />
@@ -57,7 +75,7 @@
         <activity android:name=".InconclusiveResultLog" />
         <activity android:name=".InconclusiveSetClass" />
         <activity android:name=".UserLog" />
-        <activity android:name=".UserLogDetailedInfo"></activity>
+        <activity android:name=".UserLogDetailedInfo" />
     </application>
 
 </manifest>

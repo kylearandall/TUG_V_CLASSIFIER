@@ -48,6 +48,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.load.engine.bitmap_recycle.ByteArrayAdapter;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -84,7 +86,11 @@ public class Camera2BasicFragment extends Fragment
     private Button nextButton;
     private String date;
     private String location;
+    private String userName;
     private ArrayList<String> pictureStrings;
+    private ArrayList<Bitmap> pictureBitmaps;
+    Bundle sendResults;
+    private ArrayList<ByteArrayAdapter> pics;
 
 
     /** Max preview width that is guaranteed by Camera2 API */
@@ -229,6 +235,10 @@ public class Camera2BasicFragment extends Fragment
                     new Runnable() {
                         @Override
                         public void run() {
+                            sendResults.putString("result", finalResult);
+                            sendResults.putString("location", location);
+                            sendResults.putString("date", date);
+                            sendResults.putString("username", userName);
                             nextButton.setVisibility(View.VISIBLE);
                         }
                     }
@@ -303,6 +313,10 @@ public class Camera2BasicFragment extends Fragment
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        CameraClassifier activity = (CameraClassifier)getActivity();
+        location = activity.getLocation();
+        date = activity.getDate();
+        userName = activity.getUserName();
         return inflater.inflate(R.layout.fragment_camera2_basic, container, false);
     }
 
@@ -312,23 +326,7 @@ public class Camera2BasicFragment extends Fragment
         textureView = (AutoFitTextureView) view.findViewById(R.id.texture);
         textView = (TextView) view.findViewById(R.id.text);
         nextButton = (Button)view.findViewById(R.id.nextbutton);
-        CameraClassifier activity = (CameraClassifier)getActivity();
-        location = activity.getLocation();
-        date = activity.getDate();
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("result", finalResult);
-                bundle.putString("location", location);
-                bundle.putString("date", date);
-                bundle.putStringArrayList("pictures", pictureStrings);
-                Intent results = new Intent(getContext(), Results.class);
-                results.putExtras(bundle);
-                startActivity(results);
 
-            }
-        });
     }
 
     /** Load the model and labels. */
@@ -342,6 +340,20 @@ public class Camera2BasicFragment extends Fragment
         }
         results = new ArrayList<>();
         pictureStrings = new ArrayList<>();
+        pictureBitmaps = new ArrayList<>();
+        sendResults = new Bundle();
+        Intent startPicConverter = new Intent (getContext(), PictureConverter.class);
+        getContext().startService(startPicConverter);
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent results = new Intent(getContext(), Results.class);
+                results.putExtras(sendResults);
+                startActivity(results);
+
+            }
+        });
         startBackgroundThread();
 
     }
@@ -722,13 +734,17 @@ public class Camera2BasicFragment extends Fragment
                 textureView.getBitmap(ImageClassifier.DIM_IMG_SIZE_X, ImageClassifier.DIM_IMG_SIZE_Y);
         String textToShow = classifier.classifyFrame(bitmap);
         showToast("Classifying");
-        String pic = BitMapToString(bitmap);
-        pictureStrings.add(pic);
+        //pictureBitmaps.add(bitmap);
+        ByteArrayOutputStream stream=new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, stream);
+        byte [] b=stream.toByteArray();
+        String temp= Base64.encodeToString(b, Base64.DEFAULT);
+        sendPicturesToService(temp);
         results.add(textToShow);
         bitmap.recycle();
         if(results.size()==20){
-            getFinalResult();
             runClassifier=false;
+            getFinalResult();
             //testing code to test inconclusive use case. Remove before demonstration
             //finalResult="Inconclusive";
             if(finalResult.equals("Inconclusive")){
@@ -737,17 +753,19 @@ public class Camera2BasicFragment extends Fragment
             }else{
                 Toast.makeText(getContext(), "Classification Complete!", Toast.LENGTH_SHORT).show();
                 showButton();
+
             }
         }
     }
 
-    private String BitMapToString(Bitmap bitmap){
-        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
-        byte [] b=baos.toByteArray();
-        String temp= Base64.encodeToString(b, Base64.DEFAULT);
-        return temp;
+    private void sendPicturesToService(String picture){
+            Intent sendPics = new Intent("android.intent.action.SENDTO");
+            sendPics.putExtra("picture", picture);
+            getContext().sendBroadcast(sendPics);
+
     }
+
+
 
     private void inconclusiveDialogBox(){
         final android.support.v7.app.AlertDialog.Builder builderSingle = new android.support.v7.app.AlertDialog.Builder(getContext());
@@ -757,7 +775,12 @@ public class Camera2BasicFragment extends Fragment
         builderSingle.setPositiveButton(R.string.scanagain, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Intent stopPicConverter = new Intent(getContext(), PictureConverter.class);
+                getContext().stopService(stopPicConverter);
+                Bundle sendInfoBack = new Bundle();
+                sendInfoBack.putString("username", userName);
                 Intent scanAgain = new Intent(getContext(), LaunchClassifier.class);
+                scanAgain.putExtras(sendInfoBack);
                 startActivity(scanAgain);
             }
         });

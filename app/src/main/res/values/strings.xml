@@ -81,4 +81,5 @@
     <string name="dateheader">Date:</string>
     <string name="location">Location:</string>
     <string name="resultstatusheader">Classification Status:</string>
+    <string name="loadingtext">System is Loading. Please Wait.</string>
 </resources>
