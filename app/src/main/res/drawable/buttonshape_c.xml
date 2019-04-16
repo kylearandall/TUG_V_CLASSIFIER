@@ -8,7 +8,7 @@
         android:centerX="35%"
         android:centerColor="#087CF0"
         android:startColor="#087CF0"
-        android:endColor="#529EEA"
+        android:endColor="#087CF0"
         android:type="linear"
         />
     <padding

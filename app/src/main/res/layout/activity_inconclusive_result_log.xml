@@ -6,21 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".IncorrectResultLog">
 
+    <Space
+        android:id="@+id/topspace"
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
+
     <ImageView
         android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="47dp"
         app:srcCompat="@drawable/textron"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteY="0dp"
+        android:layout_below="@+id/topspace"/>
 
 
     <LinearLayout
         android:id="@+id/incorrecttitle"
         android:layout_width="match_parent"
         android:layout_height="43dp"
-        android:orientation="horizontal"
-        android:layout_below="@+id/logo">
+        android:layout_below="@+id/logo"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/inconclusivetitletext"
@@ -56,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/midspace"
-        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-19dp"
         android:text="@string/inconclusiveselectfactorstitle"
         android:textAlignment="center"
         android:textSize="18sp" />
@@ -180,11 +187,18 @@
 
     <Button
         android:id="@+id/savebutton"
-        android:layout_width="match_parent"
-        android:layout_height="71dp"
-        android:layout_alignParentBottom="true"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:text="@string/save" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="79dp"
+        android:layout_marginEnd="81dp"
+        android:layout_marginBottom="156dp"
+        android:background="@drawable/custom_button"
+        android:text="@string/save"
+        android:textAllCaps="true"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
 
 </RelativeLayout>
