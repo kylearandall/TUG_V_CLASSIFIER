@@ -5,13 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UserLog">
+    <Space
+        android:id="@+id/topspace"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
     <ImageView
         android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="47dp"
         app:srcCompat="@drawable/textron"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteY="0dp"
+        android:layout_below="@+id/topspace"/>
 
     <TextView
         android:id="@+id/userlogheader"
@@ -27,18 +33,25 @@
         android:id="@+id/gobackbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginEnd="0dp"
-        android:text="@string/returntomenu" />
+        android:layout_marginBottom="39dp"
+        android:text="@string/returntomenu"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:background="@drawable/custom_button"/>
 
     <Button
         android:id="@+id/searchbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/gobackbutton"
-        android:layout_centerHorizontal="true"
-        android:text="@string/searchbutton" />
+        android:layout_marginBottom="13dp"
+        android:text="@string/searchbutton"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:background="@drawable/custom_button"/>
 
     <ListView
         android:id="@+id/userloglist"
@@ -46,5 +59,6 @@
         android:layout_height="416dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="104dp" />
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="130dp" />
 </RelativeLayout>
