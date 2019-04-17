@@ -59,8 +59,8 @@ public class UserLogItemDBAdapter {
         return  cursor;
     }
 
-    public List<UserLogItem> getAllLocalUserLogs(){
-        List<UserLogItem> localLogs = new ArrayList<>();
+    public ArrayList<UserLogItem> getAllLocalUserLogs(){
+        ArrayList<UserLogItem> localLogs = new ArrayList<>();
         Cursor cursor = getCursorForAllUserLogItems();
         if(cursor!=null&&cursor.getCount()>0){
             while(cursor.moveToNext()){
@@ -79,8 +79,8 @@ public class UserLogItemDBAdapter {
         return cursor;
     }
 
-    public List<UserLogItem> getLogsBySpecificUserName(String userName){
-        List<UserLogItem> localLogs = new ArrayList<>();
+    public ArrayList<UserLogItem> getLogsBySpecificUserName(String userName){
+        ArrayList<UserLogItem> localLogs = new ArrayList<>();
         Cursor cursor = getCursorForSpecificUserName(userName);
         if(cursor!=null&&cursor.getCount()>0){
             while(cursor.moveToNext()){
@@ -96,8 +96,8 @@ public class UserLogItemDBAdapter {
         Cursor cursor=mSQLiteDB.query(TABLE_USERLOGLOCAL, new String[]{COLUMN_ID, COLUMN_USERNAME, COLUMN_LOCATION, COLUMN_RECCLASS, COLUMN_SETCLASS, COLUMN_RESULTSTATUS, COLUMN_PICTURESTRINGS, COLUMN_ADMINDAPPROVEDNAME, COLUMN_OTHERUNKNOWNTEXT, COLUMN_FACTORS, COLUMN_UPLOADED}, COLUMN_DATE+" LIKE '%"+date+"%", null, null, null, null, null);
         return cursor;
     }
-    public List<UserLogItem> getLogsBySpecificDate(String date){
-        List<UserLogItem> localLogs = new ArrayList<>();
+    public ArrayList<UserLogItem> getLogsBySpecificDate(String date){
+        ArrayList<UserLogItem> localLogs = new ArrayList<>();
         Cursor cursor = getCursorForSpecificDate(date);
         if(cursor!=null&&cursor.getCount()>0){
             while(cursor.moveToNext()){
@@ -114,8 +114,8 @@ public class UserLogItemDBAdapter {
         return cursor;
     }
 
-    public List<UserLogItem> getLogsBySpecificlocation(String location){
-        List<UserLogItem> localLogs = new ArrayList<>();
+    public ArrayList<UserLogItem> getLogsBySpecificlocation(String location){
+        ArrayList<UserLogItem> localLogs = new ArrayList<>();
         Cursor cursor = getCursorForSpecificLocation(location);
         if(cursor!=null&&cursor.getCount()>0){
             while(cursor.moveToNext()){
@@ -132,8 +132,8 @@ public class UserLogItemDBAdapter {
         return cursor;
     }
 
-    public List<UserLogItem> getLogsBySpecificRecClass(String recClass){
-        List<UserLogItem> localLogs = new ArrayList<>();
+    public ArrayList<UserLogItem> getLogsBySpecificRecClass(String recClass){
+        ArrayList<UserLogItem> localLogs = new ArrayList<>();
         Cursor cursor = getCursorForSpecificRecClass(recClass);
         if(cursor!=null&&cursor.getCount()>0){
             while(cursor.moveToNext()){
@@ -150,8 +150,8 @@ public class UserLogItemDBAdapter {
         return cursor;
     }
 
-    public List<UserLogItem> getLogsBySpecificSetClass(String setClass){
-        List<UserLogItem> localLogs = new ArrayList<>();
+    public ArrayList<UserLogItem> getLogsBySpecificSetClass(String setClass){
+        ArrayList<UserLogItem> localLogs = new ArrayList<>();
         Cursor cursor = getCursorForSpecificSetClass(setClass);
         if(cursor!=null&&cursor.getCount()>0){
             while(cursor.moveToNext()){
@@ -168,8 +168,8 @@ public class UserLogItemDBAdapter {
         return cursor;
     }
 
-    public List<UserLogItem> getLogsBySpecificResultStatus(String resultStatus){
-        List<UserLogItem> localLogs = new ArrayList<>();
+    public ArrayList<UserLogItem> getLogsBySpecificResultStatus(String resultStatus){
+        ArrayList<UserLogItem> localLogs = new ArrayList<>();
         Cursor cursor = getCursorforSpecificResultStatus(resultStatus);
         if(cursor!=null&&cursor.getCount()>0){
             while(cursor.moveToNext()){
@@ -186,8 +186,8 @@ public class UserLogItemDBAdapter {
         return cursor;
     }
 
-    public List<UserLogItem> getLogsBySpecificAdminApprovalName(String adminName){
-        List<UserLogItem> localLogs = new ArrayList<>();
+    public ArrayList<UserLogItem> getLogsBySpecificAdminApprovalName(String adminName){
+        ArrayList<UserLogItem> localLogs = new ArrayList<>();
         Cursor cursor = getCursorforSpecificAdminApprovalName(adminName);
         if(cursor!=null&&cursor.getCount()>0){
             while(cursor.moveToNext()){
@@ -205,8 +205,8 @@ public class UserLogItemDBAdapter {
         return cursor;
     }
 
-    public List<UserLogItem> getLogsNotUploaded(){
-        List<UserLogItem> localLogs = new ArrayList<>();
+    public ArrayList<UserLogItem> getLogsNotUploaded(){
+        ArrayList<UserLogItem> localLogs = new ArrayList<>();
         Cursor cursor = getCursorForUserLogsNotUploaded();
         if(cursor!=null&&cursor.getCount()>0){
             while(cursor.moveToNext()){

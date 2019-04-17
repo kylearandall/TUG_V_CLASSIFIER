@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -84,7 +85,11 @@ public class Results extends AppCompatActivity {
         set.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setClassDialogBox(getResources().getString(R.string.setDialogboxtitle)+" "+charResult,getResources().getString(R.string.setDialogboxmessage));
+                if(loadComplete) {
+                    setClassDialogBox(getResources().getString(R.string.setDialogboxtitle) + " " + charResult, getResources().getString(R.string.setDialogboxmessage));
+                }else{
+                    Toast.makeText(getApplicationContext(), "Pictures still loading. Please Try Again", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -137,7 +142,7 @@ public class Results extends AppCompatActivity {
                 stopService(stopPicConverter);
                 JSONObject json = new JSONObject();
                 try {
-                    json.put("pictureStrings", new JSONArray(pictureList));
+                    json.put("pictures", new JSONArray(pictureList));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -165,6 +170,7 @@ public class Results extends AppCompatActivity {
         builderSingle.setPositiveButton(R.string.returntomenu, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                unregisterReceiver(myBR);
                 Bundle sendUserName = new Bundle();
                 sendUserName.putString("username", userName);
                 Intent menu = new Intent(Results.this, MainMenu.class);
@@ -188,6 +194,7 @@ public class Results extends AppCompatActivity {
                 stopService(stopPicConverter);
                 Bundle sendUserName = new Bundle();
                 sendUserName.putString("username", userName);
+                unregisterReceiver(myBR);
                 Intent backToScan = new Intent(Results.this, LaunchClassifier.class);
                 backToScan.putExtras(sendUserName);
                 startActivity(backToScan);
@@ -213,7 +220,6 @@ public class Results extends AppCompatActivity {
         builderSingle.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //TODO add admin authentication for approval.
                 resultStatus = "Incorrect";
                 Bundle bundle = new Bundle();
                 bundle.putString("recResult", charResult);
@@ -221,6 +227,7 @@ public class Results extends AppCompatActivity {
                 bundle.putString("date", date);
                 bundle.putString("location", location);
                 bundle.putString("username", userName);
+                unregisterReceiver(myBR);
                 Intent adminLogIn = new Intent(Results.this, AdminOverrideLogIn.class);
                 adminLogIn.putExtras(bundle);
                 startActivity(adminLogIn);
@@ -236,29 +243,7 @@ public class Results extends AppCompatActivity {
         builderSingle.show();
     }
 
-    private void loadingDialogBox(){
-        final android.support.v7.app.AlertDialog.Builder builderSingle = new android.support.v7.app.AlertDialog.Builder(this);
-        builderSingle.setTitle("Loading");
-        builderSingle.setMessage(R.string.loadingtext);
-        while(!loadComplete){
-            builderSingle.show();
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        JSONObject json = new JSONObject();
-        try {
-            json.put("pictureStrings", new JSONArray(pictureList));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        pictureStrings = json.toString();
-        userLogItemDBAdapter.insertCorrect(userName, date, location, charResult, pictureStrings);
-        classIsSetDialogBox();
 
-    }
 
 
 

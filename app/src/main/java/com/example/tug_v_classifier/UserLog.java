@@ -13,38 +13,38 @@ import java.util.ArrayList;
 public class UserLog extends AppCompatActivity {
     private ListView userLogList;
     private Button mainMenu, search;
-    private UserLogItem selectedUserLog;
-
-    public UserLogItem getSelectedUserLog(){
-        return selectedUserLog;
-    }
-
+    private String selectedUserLogID;
+    private ArrayList<UserLogItem> userLogItemsList;
+    private UserLogItemDBAdapter userLogItemDBAdapter;
+    private String userName;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_log);
+        Bundle getUserName = getIntent().getExtras();
+        userName=getUserName.getString("username");
         mainMenu=(Button)findViewById(R.id.gobackbutton);
         search = (Button)findViewById(R.id.searchbutton);
+        userLogItemDBAdapter = UserLogItemDBAdapter.getUserLogItemDBAdapterInstance(this);
         mainMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle sendName = new Bundle();
+                sendName.putString("username", userName);
                 Intent goBack = new Intent(UserLog.this, MainMenu.class);
+                goBack.putExtras(sendName);
                 startActivity(goBack);
             }
         });
 
         userLogList = (ListView)findViewById(R.id.userloglist);
+        userLogItemsList = new ArrayList<>();
 
+        //code for getting local DB values
+        userLogItemsList = userLogItemDBAdapter.getAllLocalUserLogs();
 
-        ArrayList<UserLogItem> userLogItemsList = new ArrayList<>();
-
-        //test values for user log
-
-
-
-        //end test value code for user log
 
         UserLogAdapter adapter = new UserLogAdapter(this, R.layout.user_log_list, userLogItemsList);
 
@@ -53,8 +53,11 @@ public class UserLog extends AppCompatActivity {
         userLogList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectedUserLog = userLogItemsList.get(position);
+                selectedUserLogID = userLogItemsList.get(position).getUserName()+"_"+userLogItemsList.get(position).getDate();
+                Bundle userLogID = new Bundle();
+                userLogID.putString("id", selectedUserLogID);
                 Intent detailedInfo = new Intent(UserLog.this, UserLogDetailedInfo.class);
+                detailedInfo.putExtras(userLogID);
                 startActivity(detailedInfo);
             }
         });

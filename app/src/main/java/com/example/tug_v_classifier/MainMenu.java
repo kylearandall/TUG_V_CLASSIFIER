@@ -38,7 +38,10 @@ public class MainMenu extends AppCompatActivity {
         userLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle sendName = new Bundle();
+                sendName.putString("username", name);
                 Intent uLog = new Intent(MainMenu.this, UserLog.class);
+                uLog.putExtras(sendName);
                 startActivity(uLog);
             }
         });

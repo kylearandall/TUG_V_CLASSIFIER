@@ -71,9 +71,19 @@
         <activity android:name=".AdminOverrideLogIn" />
         <activity android:name=".IncorrectResultLog" />
         <activity android:name=".OtherUnknownLog" />
-        <activity android:name=".IncorrectSetClass" />
+        <activity android:name=".IncorrectSetClass">
+            <intent-filter>
+                <action android:name="android.intent.action.ANSWER"/>
+            </intent-filter>
+
+        </activity>
         <activity android:name=".InconclusiveResultLog" />
-        <activity android:name=".InconclusiveSetClass" />
+        <activity android:name=".InconclusiveSetClass">
+            <intent-filter>
+                <action android:name="android.intent.action.ANSWER"/>
+            </intent-filter>
+
+        </activity>
         <activity android:name=".UserLog" />
         <activity android:name=".UserLogDetailedInfo" />
     </application>

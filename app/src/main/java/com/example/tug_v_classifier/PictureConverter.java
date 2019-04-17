@@ -14,12 +14,9 @@ import android.util.Log;
 import java.util.ArrayList;
 
 public class PictureConverter extends Service {
-    private Bitmap currentBitMap;
-    private boolean isConverterOn;
     private String currentPictureString;
     private ArrayList<String> pictureStrings;
-    private ArrayList<Bitmap> bitmaps;
-    BroadcastReceiver myBR1, myBR2;
+    private BroadcastReceiver myBR1, myBR2;
     private final String TAG = "PictureConverter Service";
 
     class PictureConverterServiceBinder extends Binder {
@@ -32,7 +29,6 @@ public class PictureConverter extends Service {
 
     @Override
     public void onCreate() {
-        isConverterOn = true;
         pictureStrings = new ArrayList<>();
         IntentFilter filter = new IntentFilter("android.intent.action.SENDTO");
 

@@ -788,8 +788,13 @@ public class Camera2BasicFragment extends Fragment
         builderSingle.setNegativeButton(R.string.setmanually, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //TODO Add intent to set manual screen
+                finalResult = "N/A";
+                sendResults.putString("result", finalResult);
+                sendResults.putString("location", location);
+                sendResults.putString("date", date);
+                sendResults.putString("username", userName);
                 Intent setInconclusiveResult = new Intent(getContext(), InconclusiveResultLog.class);
+                setInconclusiveResult.putExtras(sendResults);
                 startActivity(setInconclusiveResult);
             }
         });
@@ -839,7 +844,7 @@ public class Camera2BasicFragment extends Fragment
             finalResult = "Inconclusive";
         }
 
-        if(biggest.size()>=9)
+        if(biggest.size()>=18)
             finalResult = biggest.get(0);
         else
             finalResult = "Inconclusive";

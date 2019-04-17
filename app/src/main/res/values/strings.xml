@@ -66,7 +66,7 @@
     <string name="overrideboxline3">Proceed?</string>
     <string name="correctclassboxtitle">Set Recommended Towing Class?</string>
     <string name="correctclassboxline1"> was the System Recommended Towing Class.</string>
-    <string name="correctclassboxline2">Would you like to set the Recommended Towing Class and log a Correctly Identified Result?</string>
+    <string name="correctclassboxline2">Would you like to set the Recommended Towing Class? Result Status will still be logged as Incorrect.</string>
     <string name="inconclusivesetboxline1">This will manually set the Towing Class to </string>
     <string name="inconclusivesetboxline2">Proceed?</string>
     <string name="unknownotherboxtitle">More Info Needed</string>
