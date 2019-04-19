@@ -26,12 +26,10 @@ public class IncorrectSetClass extends AppCompatActivity {
     private String charResult;
     private TextView resultDispaly;
     private Bundle sendUserName;
-    private String userName, location, date, factors, otherUnknownText, resultStatus, pictureString, adminUserName;
+    private String userName, location, date, factors, otherUnknownText, resultStatus, fileDir, adminUserName;
     private UserLogItemDBAdapter userLogItemDBAdapter;
-    private ArrayList<String> pictureList;
-    private BroadcastReceiver myBR;
     private final String TAG = "InconclusiveSetClass Activity";
-    private boolean loadComplete;
+
 
 
     @Override
@@ -57,35 +55,20 @@ public class IncorrectSetClass extends AppCompatActivity {
         adminUserName = bResult.getString("admin");
         factors = bResult.getString("factors");
         otherUnknownText = bResult.getString("othertext");
+        fileDir = bResult.getString("imagepath");
         resultStatus = "Incorrect";
 
         //set text view with identified class
         String resultString = getResources().getString(R.string.resultsheader)+" "+charResult;
         resultDispaly.setText(resultString);
 
-        //Initialize DB and ArrayList for Pics
+        //Initialize DB
         userLogItemDBAdapter = UserLogItemDBAdapter.getUserLogItemDBAdapterInstance(this);
-        loadComplete = false;
-        pictureList = new ArrayList<>();
 
-        //set up Broadcast Receiver for picture Strings and send broadcast to start service broadcast
-        myBR = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                String currentPictureString = intent.getStringExtra("picture");
-                pictureList.add(currentPictureString);
-                Log.i(TAG, "picture received.");
-                if(pictureList.size()==20){
-                    loadComplete=true;
-                }
-            }
-        };
 
-        IntentFilter filter = new IntentFilter("android.intent.action.SEND");
-        registerReceiver(myBR,filter);
 
-        Intent startPicMovement = new Intent("android.intent.action.ANSWER");
-        this.sendBroadcast(startPicMovement);
+
+
 
         //put username in bundle for sending back to main menu
         sendUserName = new Bundle();
@@ -165,13 +148,9 @@ public class IncorrectSetClass extends AppCompatActivity {
         builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(loadComplete){
-                    pictureString = pictureArraytoString();
-                    userLogItemDBAdapter.insertOverride(userName,date,location,charResult,overrideClass,resultStatus,pictureString,adminUserName,otherUnknownText,factors);
+                    userLogItemDBAdapter.insertOverride(userName,date,location,charResult,overrideClass,resultStatus,fileDir,adminUserName,otherUnknownText,factors);
                     classSetDialogBox(overrideClass);
-                }else{
-                    Toast.makeText(getApplicationContext(), "Pictures still loading. Please Try Again", Toast.LENGTH_SHORT).show();
-                }
+
 
             }
         });
@@ -186,7 +165,6 @@ public class IncorrectSetClass extends AppCompatActivity {
         builder.setPositiveButton(R.string.returntomenu, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                unregisterReceiver(myBR);
                 Intent returnToMenu = new Intent(IncorrectSetClass.this, MainMenu.class);
                 returnToMenu.putExtras(sendUserName);
                 startActivity(returnToMenu);
@@ -209,25 +187,14 @@ public class IncorrectSetClass extends AppCompatActivity {
         builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(loadComplete){
-                    pictureString = pictureArraytoString();
-                    userLogItemDBAdapter.insertOverride(userName,date,location,charResult,correctClass,resultStatus,pictureString,adminUserName,otherUnknownText,factors);
+
+                    userLogItemDBAdapter.insertOverride(userName,date,location,charResult,correctClass,resultStatus,fileDir,adminUserName,otherUnknownText,factors);
                     classSetDialogBox(correctClass);
-                }else{
-                    Toast.makeText(getApplicationContext(), "Pictures still loading. Please Try Again", Toast.LENGTH_SHORT).show();
-                }
+
             }
         });
         builder.show();
     }
-    private String pictureArraytoString(){
-        JSONObject json = new JSONObject();
-        try {
-            json.put("pictures", new JSONArray(pictureList));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return json.toString();
-    }
+
 
 }

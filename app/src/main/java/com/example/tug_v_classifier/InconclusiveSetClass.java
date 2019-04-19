@@ -21,12 +21,11 @@ import java.util.ArrayList;
 public class InconclusiveSetClass extends AppCompatActivity {
     private Button a,b,c,d,e;
     private Bundle sendUserName;
-    private String userName, location, date, result, factors, otherUnknownText, setClass, resultStatus, pictureString;
+    private String userName, location, date, result, factors, otherUnknownText, setClass, resultStatus, fileDir;
     private UserLogItemDBAdapter userLogItemDBAdapter;
-    private ArrayList<String> pictureList;
-    private BroadcastReceiver myBR;
+
     private final String TAG = "InconclusiveSetClass Activity";
-    private boolean loadComplete;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,30 +82,16 @@ public class InconclusiveSetClass extends AppCompatActivity {
         result = getValues.getString("result");
         factors = getValues.getString("factors");
         otherUnknownText = getValues.getString("othertext");
+        fileDir=getValues.getString("imagepath");
         resultStatus = "Inconclusive";
 
-        //get Picture String from Service
+        //Initialize DB
         userLogItemDBAdapter = UserLogItemDBAdapter.getUserLogItemDBAdapterInstance(this);
-        loadComplete = false;
-        pictureList = new ArrayList<>();
 
-        myBR = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                String currentPictureString = intent.getStringExtra("picture");
-                pictureList.add(currentPictureString);
-                Log.i(TAG, "picture received.");
-                if(pictureList.size()==20){
-                    loadComplete=true;
-                }
-            }
-        };
 
-        IntentFilter filter = new IntentFilter("android.intent.action.SEND");
-        registerReceiver(myBR,filter);
 
-        Intent startPicMovement = new Intent("android.intent.action.ANSWER");
-        this.sendBroadcast(startPicMovement);
+
+
 
         //put username in bundle for sending back to main menu
         sendUserName = new Bundle();
@@ -130,13 +115,9 @@ public class InconclusiveSetClass extends AppCompatActivity {
         builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(loadComplete) {
-                    pictureString = pictureArraytoString();
-                    userLogItemDBAdapter.insertOverride(userName,date,location,result,setClass,resultStatus,pictureString,null,otherUnknownText,factors);
+
+                    userLogItemDBAdapter.insertOverride(userName,date,location,result,setClass,resultStatus,fileDir,null,otherUnknownText,factors);
                     classSetBox(setClass);
-                }else{
-                    Toast.makeText(getApplicationContext(), "Pictures still loading. Please Try Again", Toast.LENGTH_SHORT).show();
-                }
             }
         });
         builder.show();
@@ -151,7 +132,7 @@ public class InconclusiveSetClass extends AppCompatActivity {
         builder.setPositiveButton(R.string.returntomenu, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                unregisterReceiver(myBR);
+
                 Intent menu = new Intent(InconclusiveSetClass.this, MainMenu.class);
                 menu.putExtras(sendUserName);
                 startActivity(menu);
@@ -161,14 +142,5 @@ public class InconclusiveSetClass extends AppCompatActivity {
         builder.show();
     }
 
-    private String pictureArraytoString(){
-        JSONObject json = new JSONObject();
-        try {
-            json.put("pictures", new JSONArray(pictureList));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return json.toString();
-    }
 
 }

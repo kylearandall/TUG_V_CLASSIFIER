@@ -40,6 +40,7 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View v) {
                 Bundle sendName = new Bundle();
                 sendName.putString("username", name);
+                sendName.putString("localcheck","0");
                 Intent uLog = new Intent(MainMenu.this, UserLog.class);
                 uLog.putExtras(sendName);
                 startActivity(uLog);

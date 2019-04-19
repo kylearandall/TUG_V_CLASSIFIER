@@ -14,7 +14,7 @@ import org.w3c.dom.Text;
 public class AdminOverrideLogIn extends AppCompatActivity {
     private Button adminLogIn, goBack;
     private TextView adminUserName, adminPassword;
-    private String charResult, userName, admineUserName, location, date;
+    private String charResult, userName, admineUserName, location, date, adminPasswordInput, fileDir;
     private Bundle sendValues;
 
 
@@ -29,6 +29,7 @@ public class AdminOverrideLogIn extends AppCompatActivity {
         userName = bundle.getString("username");
         location = bundle.getString("location");
         date = bundle.getString("date");
+        fileDir=bundle.getString("imagepath");
 
         adminUserName = (TextView)findViewById(R.id.adminusername);
         adminPassword = (TextView)findViewById(R.id.adminpassword);
@@ -43,11 +44,13 @@ public class AdminOverrideLogIn extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please fill in Admin User Name and Password", Toast.LENGTH_SHORT).show();
                 }else{
                     admineUserName=adminUserName.getText().toString();
+                    //adminPasswordInput=adminPassword.getText().toString();
                     sendValues.putString("username", userName);
                     sendValues.putString("location", location);
                     sendValues.putString("date", date);
                     sendValues.putString("result", charResult);
                     sendValues.putString("admin", admineUserName);
+                    sendValues.putString("imagepath", fileDir);
                     Intent adminLogIn = new Intent(AdminOverrideLogIn.this, IncorrectResultLog.class);
                     adminLogIn.putExtras(sendValues);
                     startActivity(adminLogIn);

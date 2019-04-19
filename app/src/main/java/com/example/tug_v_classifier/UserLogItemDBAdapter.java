@@ -64,7 +64,7 @@ public class UserLogItemDBAdapter {
         Cursor cursor = getCursorForAllUserLogItems();
         if(cursor!=null&&cursor.getCount()>0){
             while(cursor.moveToNext()){
-                UserLogItem userLogItem = new UserLogItem(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getInt(11));
+                UserLogItem userLogItem = new UserLogItem(cursor.getString(0),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getInt(11));
                 localLogs.add(userLogItem);
             }
         }
@@ -72,7 +72,26 @@ public class UserLogItemDBAdapter {
         return localLogs;
     }
 
+    public void delteAll(){
+        mSQLiteDB.execSQL("delete from "+TABLE_USERLOGLOCAL);
+    }
+
     //Methods for getting userlogs based on specific queries
+
+    public Cursor getCursorForSpecificUserLogID(String userLogID){
+        Cursor cursor=mSQLiteDB.query(TABLE_USERLOGLOCAL, new String[]{COLUMN_USERNAME, COLUMN_DATE, COLUMN_LOCATION, COLUMN_RECCLASS, COLUMN_SETCLASS, COLUMN_RESULTSTATUS, COLUMN_PICTURESTRINGS, COLUMN_ADMINDAPPROVEDNAME, COLUMN_OTHERUNKNOWNTEXT, COLUMN_FACTORS, COLUMN_UPLOADED}, COLUMN_ID+" = '%"+userLogID+"%'", null, null, null, null, null);
+        return cursor;
+    }
+
+    public UserLogItem getSpecificUserLogByID(String userLogID){ 
+        Cursor cursor = getCursorForSpecificUserLogID(userLogID);
+        ArrayList<UserLogItem> localLogs =new ArrayList<>();
+       if(cursor!=null&&cursor.getCount()>0){
+           UserLogItem userLogItem = new UserLogItem(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getInt(11));
+           localLogs.add(userLogItem);
+       }cursor.close();
+        return localLogs.get(0);
+    }
 
     public Cursor getCursorForSpecificUserName(String userName){
         Cursor cursor=mSQLiteDB.query(TABLE_USERLOGLOCAL, new String[]{COLUMN_ID, COLUMN_DATE, COLUMN_LOCATION, COLUMN_RECCLASS, COLUMN_SETCLASS, COLUMN_RESULTSTATUS, COLUMN_PICTURESTRINGS, COLUMN_ADMINDAPPROVEDNAME, COLUMN_OTHERUNKNOWNTEXT, COLUMN_FACTORS, COLUMN_UPLOADED}, COLUMN_USERNAME+" LIKE '%"+userName+"%", null, null, null, null, null);
@@ -84,7 +103,7 @@ public class UserLogItemDBAdapter {
         Cursor cursor = getCursorForSpecificUserName(userName);
         if(cursor!=null&&cursor.getCount()>0){
             while(cursor.moveToNext()){
-                UserLogItem userLogItem = new UserLogItem(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getInt(11));
+                UserLogItem userLogItem = new UserLogItem(cursor.getString(0),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getInt(11));
                 localLogs.add(userLogItem);
             }
         }
@@ -101,7 +120,7 @@ public class UserLogItemDBAdapter {
         Cursor cursor = getCursorForSpecificDate(date);
         if(cursor!=null&&cursor.getCount()>0){
             while(cursor.moveToNext()){
-                UserLogItem userLogItem = new UserLogItem(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getInt(11));
+                UserLogItem userLogItem = new UserLogItem(cursor.getString(0),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getInt(11));
                 localLogs.add(userLogItem);
             }
         }
@@ -119,7 +138,7 @@ public class UserLogItemDBAdapter {
         Cursor cursor = getCursorForSpecificLocation(location);
         if(cursor!=null&&cursor.getCount()>0){
             while(cursor.moveToNext()){
-                UserLogItem userLogItem = new UserLogItem(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getInt(11));
+                UserLogItem userLogItem = new UserLogItem(cursor.getString(0),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getInt(11));
                 localLogs.add(userLogItem);
             }
         }
@@ -137,7 +156,7 @@ public class UserLogItemDBAdapter {
         Cursor cursor = getCursorForSpecificRecClass(recClass);
         if(cursor!=null&&cursor.getCount()>0){
             while(cursor.moveToNext()){
-                UserLogItem userLogItem = new UserLogItem(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getInt(11));
+                UserLogItem userLogItem = new UserLogItem(cursor.getString(0),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getInt(11));
                 localLogs.add(userLogItem);
             }
         }
@@ -155,7 +174,7 @@ public class UserLogItemDBAdapter {
         Cursor cursor = getCursorForSpecificSetClass(setClass);
         if(cursor!=null&&cursor.getCount()>0){
             while(cursor.moveToNext()){
-                UserLogItem userLogItem = new UserLogItem(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getInt(11));
+                UserLogItem userLogItem = new UserLogItem(cursor.getString(0),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getInt(11));
                 localLogs.add(userLogItem);
             }
         }
@@ -173,7 +192,7 @@ public class UserLogItemDBAdapter {
         Cursor cursor = getCursorforSpecificResultStatus(resultStatus);
         if(cursor!=null&&cursor.getCount()>0){
             while(cursor.moveToNext()){
-                UserLogItem userLogItem = new UserLogItem(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getInt(11));
+                UserLogItem userLogItem = new UserLogItem(cursor.getString(0),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getInt(11));
                 localLogs.add(userLogItem);
             }
         }
@@ -191,7 +210,7 @@ public class UserLogItemDBAdapter {
         Cursor cursor = getCursorforSpecificAdminApprovalName(adminName);
         if(cursor!=null&&cursor.getCount()>0){
             while(cursor.moveToNext()){
-                UserLogItem userLogItem = new UserLogItem(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getInt(11));
+                UserLogItem userLogItem = new UserLogItem(cursor.getString(0),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getInt(11));
                 localLogs.add(userLogItem);
             }
         }
@@ -210,7 +229,7 @@ public class UserLogItemDBAdapter {
         Cursor cursor = getCursorForUserLogsNotUploaded();
         if(cursor!=null&&cursor.getCount()>0){
             while(cursor.moveToNext()){
-                UserLogItem userLogItem = new UserLogItem(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getInt(11));
+                UserLogItem userLogItem = new UserLogItem(cursor.getString(0),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getInt(11));
                 localLogs.add(userLogItem);
             }
         }

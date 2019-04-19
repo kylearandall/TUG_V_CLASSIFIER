@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 public class UserLogItem {
 
-    private String userName, date, location, recClass, setClass, resultStatus, adminApprovedName, otherUnknownText, factors, pictureStrings;
+    private String userLogID, userName, date, location, recClass, setClass, resultStatus, adminApprovedName, otherUnknownText, factors, pictureStrings;
     private int uploaded;
 
-    public UserLogItem(String userName, String date, String location, String recClass, String setClass, String resultStatus, String pictureStrings, String adminApprovedName, String otherUnknownText, String factors, int uploaded) {
+    public UserLogItem(String userLogID, String userName, String date, String location, String recClass, String setClass, String resultStatus, String pictureStrings, String adminApprovedName, String otherUnknownText, String factors, int uploaded) {
+        this.userLogID = userLogID;
         this.userName = userName;
         this.date = date;
         this.location = location;
@@ -20,6 +21,15 @@ public class UserLogItem {
         this.factors = factors;
         this.uploaded = uploaded;
     }
+
+    public String getUserLogID() {
+        return userLogID;
+    }
+
+    public void setUserLogID(String userLogID) {
+        this.userLogID = userLogID;
+    }
+
 
     public String getUserName() {
         return userName;

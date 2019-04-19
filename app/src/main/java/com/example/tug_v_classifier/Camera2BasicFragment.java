@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -49,8 +50,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.load.engine.bitmap_recycle.ByteArrayAdapter;
+import com.bumptech.glide.load.resource.bitmap.BitmapDrawableTransformation;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -81,16 +85,17 @@ public class Camera2BasicFragment extends Fragment
     private TextView textView;
     private ImageClassifier classifier;
 
-    private ArrayList<String> results;
+    private ArrayList<String> results, badResults;
     private String finalResult;
     private Button nextButton;
     private String date;
     private String location;
     private String userName;
-    private ArrayList<String> pictureStrings;
-    private ArrayList<Bitmap> pictureBitmaps;
     Bundle sendResults;
-    private ArrayList<ByteArrayAdapter> pics;
+
+    private int counter, picCounter;
+    private String fileNamePrefix;
+    private String fileDir;
 
 
     /** Max preview width that is guaranteed by Camera2 API */
@@ -239,6 +244,7 @@ public class Camera2BasicFragment extends Fragment
                             sendResults.putString("location", location);
                             sendResults.putString("date", date);
                             sendResults.putString("username", userName);
+                            sendResults.putString("imagepath", fileDir);
                             nextButton.setVisibility(View.VISIBLE);
                         }
                     }
@@ -338,10 +344,15 @@ public class Camera2BasicFragment extends Fragment
         } catch (IOException e) {
             Log.e(TAG, "Failed to initialize an image classifier.");
         }
+        counter = 0;
+        picCounter=0;
         results = new ArrayList<>();
-        pictureStrings = new ArrayList<>();
-        pictureBitmaps = new ArrayList<>();
+        badResults = new ArrayList<>();
         sendResults = new Bundle();
+        String userNameNoSpaces = userName.replaceAll("\\s+","");
+        String dateNoSpaces=date.replaceAll("\\s+","");
+        String dateNoSpecialChar=dateNoSpaces.replaceAll(":","");
+        fileNamePrefix = userNameNoSpaces+dateNoSpecialChar;
         Intent startPicConverter = new Intent (getContext(), PictureConverter.class);
         getContext().startService(startPicConverter);
 
@@ -384,6 +395,7 @@ public class Camera2BasicFragment extends Fragment
     @Override
     public void onDestroy() {
         classifier.close();
+        stopBackgroundThread();
         super.onDestroy();
     }
 
@@ -627,7 +639,11 @@ public class Camera2BasicFragment extends Fragment
                 public void run() {
                     synchronized (lock) {
                         if (runClassifier) {
+                            try {
                                 classifyFrame();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                     backgroundHandler.post(periodicClassify);
@@ -725,7 +741,7 @@ public class Camera2BasicFragment extends Fragment
     }
 
     /** Classifies a frame from the preview stream. */
-    private void classifyFrame() {
+    private void classifyFrame() throws IOException {
         if (classifier == null || getActivity() == null || cameraDevice == null) {
             showToast("Uninitialized Classifier or invalid context.");
             return;
@@ -734,15 +750,21 @@ public class Camera2BasicFragment extends Fragment
                 textureView.getBitmap(ImageClassifier.DIM_IMG_SIZE_X, ImageClassifier.DIM_IMG_SIZE_Y);
         String textToShow = classifier.classifyFrame(bitmap);
         showToast("Classifying");
-        //pictureBitmaps.add(bitmap);
-        ByteArrayOutputStream stream=new  ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100, stream);
-        byte [] b=stream.toByteArray();
-        String temp= Base64.encodeToString(b, Base64.DEFAULT);
-        sendPicturesToService(temp);
-        results.add(textToShow);
+        if(badResults.size()<10){
+            badResults.add(textToShow);
+        }else{
+            if(counter%3==0) {
+                Bitmap bitmap2 =textureView.getBitmap(889, 1341);
+                fileDir = saveImagetoInternalStorage(bitmap2);
+                picCounter++;
+
+
+            }
+            counter++;
+            results.add(textToShow);
+        }
         bitmap.recycle();
-        if(results.size()==20){
+        if(results.size()==15){
             runClassifier=false;
             getFinalResult();
             //testing code to test inconclusive use case. Remove before demonstration
@@ -758,11 +780,27 @@ public class Camera2BasicFragment extends Fragment
         }
     }
 
-    private void sendPicturesToService(String picture){
-            Intent sendPics = new Intent("android.intent.action.SENDTO");
-            sendPics.putExtra("picture", picture);
-            getContext().sendBroadcast(sendPics);
 
+
+    private String saveImagetoInternalStorage(Bitmap bitmap){
+        ContextWrapper cw = new ContextWrapper(getContext());
+        File dir = cw.getDir("Images_"+fileNamePrefix, Context.MODE_PRIVATE );
+        File pic = new File(dir, picCounter+".jpg");
+
+        FileOutputStream fileOutputStream = null;
+        try{
+            fileOutputStream = new FileOutputStream(pic);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
+        }catch(Exception e){
+           e.printStackTrace();
+        }finally{
+            try{
+                fileOutputStream.close();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+        return dir.getAbsolutePath();
     }
 
 
@@ -793,6 +831,7 @@ public class Camera2BasicFragment extends Fragment
                 sendResults.putString("location", location);
                 sendResults.putString("date", date);
                 sendResults.putString("username", userName);
+                sendResults.putString("imagepath", fileDir);
                 Intent setInconclusiveResult = new Intent(getContext(), InconclusiveResultLog.class);
                 setInconclusiveResult.putExtras(sendResults);
                 startActivity(setInconclusiveResult);

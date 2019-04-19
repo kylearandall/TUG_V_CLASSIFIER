@@ -18,7 +18,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class IncorrectResultLog extends AppCompatActivity {
-    private String charResult, userName, location, date, adminUserName, factors, otherUnknownText;
+    private String charResult, userName, location, date, adminUserName, factors, otherUnknownText, fileDir;
     private ArrayList<String> factorList;
     private Button save;
     private CheckBox night, overcast, rain, snow, hail, other, distoredCameraFeed, cameraOffline, dirtyCamera, cameraPositionedIncorrectly, unusualTireShape, unknown;
@@ -38,6 +38,7 @@ public class IncorrectResultLog extends AppCompatActivity {
         date = getValues.getString("date");
         charResult = getValues.getString("result");
         adminUserName = getValues.getString("admin");
+        fileDir = getValues.getString("imagepath");
 
        //set text to display recommended class
         resultTitle = (TextView)findViewById(R.id.classchar);
@@ -65,6 +66,7 @@ public class IncorrectResultLog extends AppCompatActivity {
         sendValues.putString("date", date);
         sendValues.putString("result", charResult);
         sendValues.putString("admin", adminUserName);
+        sendValues.putString("imagepath", fileDir);
 
 
 
@@ -133,40 +135,40 @@ public class IncorrectResultLog extends AppCompatActivity {
 
     private void getFactorArray(){
         if(night.isChecked()){
-            factorList.add(getResources().getResourceName(R.string.night));
+            factorList.add("Night");
         }
         if(overcast.isChecked()){
-            factorList.add(getResources().getResourceName(R.string.overcast));
+            factorList.add("Overcast");
         }
         if(rain.isChecked()){
-            factorList.add(getResources().getResourceName(R.string.rain));
+            factorList.add("Rain");
         }
         if(snow.isChecked()){
-            factorList.add(getResources().getResourceName(R.string.snow));
+            factorList.add("Snow");
         }
         if(hail.isChecked()){
-            factorList.add(getResources().getResourceName(R.string.hail));
+            factorList.add("Hail");
         }
         if(distoredCameraFeed.isChecked()){
-            factorList.add(getResources().getResourceName(R.string.distortedcam));
+            factorList.add("Distorted Camera Feed");
         }
         if(cameraOffline.isChecked()){
-            factorList.add(getResources().getResourceName(R.string.cameraoffline));
+            factorList.add("Camera Offline");
         }
         if(dirtyCamera.isChecked()){
-            factorList.add(getResources().getResourceName(R.string.dirtycam));
+            factorList.add("Dirty Camera");
         }
         if(cameraPositionedIncorrectly.isChecked()){
-            factorList.add(getResources().getResourceName(R.string.campositionincorrectly));
+            factorList.add("Camera Positioned Incorrectly");
         }
         if(unusualTireShape.isChecked()){
-            factorList.add(getResources().getResourceName(R.string.tireshape));
+            factorList.add("Unusual Tire Shape");
         }
         if(other.isChecked()){
-            factorList.add(getResources().getResourceName(R.string.other));
+            factorList.add("Other");
         }
         if(unknown.isChecked()){
-            factorList.add(getResources().getResourceName(R.string.unknown));
+            factorList.add("Unknown");
         }
     }
 

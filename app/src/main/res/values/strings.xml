@@ -82,4 +82,18 @@
     <string name="location">Location:</string>
     <string name="resultstatusheader">Classification Status:</string>
     <string name="loadingtext">System is Loading. Please Wait.</string>
+    <string name="setclass">Set Class:</string>
+    <string name="recclass">Recommended Class</string>
+    <string name="adminapproved">Admin Approval User Name:</string>
+    <string name="observedissues">Observied Issues with Classification</string>
+    <string name="userloggoback">Return to User Log List</string>
+    <string name="displaypics">Display Pictures</string>
+    <string name="notuploadedtext">NOTICE: This User Log has not be uploaded to Cloud Database!</string>
+    <string name="addlinfo">Additional Information from User</string>
+    <string name="imagecounter">Image</string>
+    <string name="imageback">Previous Image</string>
+    <string name="nextimage">Next Image</string>
+    <string name="close">Close</string>
+    <string name="showlocalonly">Show User Logs from this Device Only</string>
+    <string name="userlogemptytext">Error Loading User Logs from Cloud Database.</string>
 </resources>

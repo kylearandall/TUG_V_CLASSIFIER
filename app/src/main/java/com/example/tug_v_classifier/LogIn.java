@@ -9,9 +9,11 @@ import android.widget.EditText;
 
 public class LogIn extends AppCompatActivity {
 
-    Button signIn;
-    EditText userName, password;
+    private Button signIn, test;
+    private EditText userName, password;
     private String name;
+    private UserLogItemDBAdapter userLogItemDBAdapter;
+
 
 
     @Override
@@ -21,6 +23,15 @@ public class LogIn extends AppCompatActivity {
 
         userName = (EditText)findViewById(R.id.usernameinpnut);
         password = (EditText)findViewById(R.id.passwordinput);
+        test = (Button)findViewById(R.id.deletebutton);
+        userLogItemDBAdapter = UserLogItemDBAdapter.getUserLogItemDBAdapterInstance(this);
+
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userLogItemDBAdapter.delteAll();
+            }
+        });
 
 
 

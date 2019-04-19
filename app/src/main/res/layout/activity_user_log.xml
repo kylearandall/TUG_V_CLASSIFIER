@@ -57,8 +57,46 @@
         android:id="@+id/userloglist"
         android:layout_width="match_parent"
         android:layout_height="416dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+
         android:layout_marginStart="0dp"
-        android:layout_marginTop="130dp" />
+
+        android:layout_below="@+id/switchcontainer"/>
+
+    <LinearLayout
+        android:id="@+id/switchcontainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userlogheader"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Switch
+            android:id="@+id/localswitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/showlocalonly"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/nouserlogstext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:text="@string/userlogemptytext"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:visibility="invisible" />
 </RelativeLayout>

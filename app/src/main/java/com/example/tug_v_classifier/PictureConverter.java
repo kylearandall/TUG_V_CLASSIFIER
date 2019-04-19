@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class PictureConverter extends Service {
     private String currentPictureString;
+    private ArrayList<String> fullPictureStrings;
     private ArrayList<String> pictureStrings;
     private BroadcastReceiver myBR1, myBR2;
     private final String TAG = "PictureConverter Service";
@@ -29,6 +30,7 @@ public class PictureConverter extends Service {
 
     @Override
     public void onCreate() {
+        fullPictureStrings = new ArrayList<>();
         pictureStrings = new ArrayList<>();
         IntentFilter filter = new IntentFilter("android.intent.action.SENDTO");
 
