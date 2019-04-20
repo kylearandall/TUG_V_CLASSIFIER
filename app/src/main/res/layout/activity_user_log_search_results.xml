@@ -32,23 +32,27 @@
     <Button
         android:id="@+id/gobackbutton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/returntomenu"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/custom_button"
+        android:text="@string/mainmenu"
         android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        android:background="@drawable/custom_button"/>
+        android:textSize="20dp" />
 
     <Button
         android:id="@+id/searchagainbutton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_above="@+id/gobackbutton"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="29dp"
         android:background="@drawable/custom_button"
-        android:text="@string/goback"
+        android:text="back"
         android:textColor="#FFFFFF"
         android:textSize="20dp" />
 
@@ -57,10 +61,11 @@
         android:layout_width="match_parent"
         android:layout_height="416dp"
 
+        android:layout_below="@+id/searchuserlogheader"
+
+
         android:layout_marginStart="0dp"
-
-
-        android:layout_below="@+id/searchuserlogheader"/>
+        android:layout_marginTop="6dp" />
 
     <TextView
         android:id="@+id/nouserlogstext"
