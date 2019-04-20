@@ -182,16 +182,30 @@
     <Button
         android:id="@+id/searchagainbutton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_alignParentBottom="true"
-        android:text="@string/userloggoback" />
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="68dp"
+        android:background="@drawable/custom_button"
+        android:text="@string/userloggoback"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp" />
 
     <Button
         android:id="@+id/displaypicsbutton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="42dp"
         android:layout_below="@+id/table"
-        android:text="@string/displaypics" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/buttonshape"
+        android:text="@string/displaypics"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/notuploadedtext"
