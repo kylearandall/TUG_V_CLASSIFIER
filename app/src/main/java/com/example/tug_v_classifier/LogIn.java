@@ -3,9 +3,20 @@ package com.example.tug_v_classifier;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoDevice;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUser;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserSession;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.AuthenticationContinuation;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.AuthenticationDetails;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.ChallengeContinuation;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.MultiFactorAuthenticationContinuation;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.AuthenticationHandler;
 
 public class LogIn extends AppCompatActivity {
 
@@ -13,6 +24,8 @@ public class LogIn extends AppCompatActivity {
     private EditText userName, password;
     private String name;
     private UserLogItemDBAdapter userLogItemDBAdapter;
+
+    private final String TAG = "LogIn Activity: ";
 
 
 
@@ -33,6 +46,50 @@ public class LogIn extends AppCompatActivity {
             }
         });
 
+        final AuthenticationHandler authenticationHandler = new AuthenticationHandler() {
+            @Override
+            public void onSuccess(CognitoUserSession userSession, CognitoDevice newDevice) {
+                Log.i(TAG, "Login Secussful!");
+                Bundle sendName = new Bundle();
+                sendName.putString("username", name);
+
+                Intent login = new Intent(LogIn.this, MainMenu.class);
+                login.putExtras(sendName);
+                startActivity(login);
+
+            }
+
+            @Override
+            public void getAuthenticationDetails(AuthenticationContinuation authenticationContinuation, String userId) {
+                AuthenticationDetails authenticationDetails = new AuthenticationDetails(userId, String.valueOf(password.getText()), null);
+
+                authenticationContinuation.setAuthenticationDetails(authenticationDetails);
+
+                authenticationContinuation.continueTask();
+
+            }
+
+            @Override
+            public void getMFACode(MultiFactorAuthenticationContinuation continuation) {
+
+            }
+
+            @Override
+            public void authenticationChallenge(ChallengeContinuation continuation) {
+
+            }
+
+            @Override
+            public void onFailure(Exception exception) {
+                Log.i(TAG, "LogIn Failed: "+exception.getLocalizedMessage());
+                Toast.makeText(getApplicationContext(), "Login Failed. Please Check User Name and Password.", Toast.LENGTH_SHORT).show();
+
+
+            }
+        };
+
+
+
 
 
 
@@ -41,11 +98,14 @@ public class LogIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 name = userName.getText().toString();
-                Bundle sendName = new Bundle();
-                sendName.putString("username", name);
-                Intent login = new Intent(LogIn.this, MainMenu.class);
-                login.putExtras(sendName);
-                startActivity(login);
+
+
+                CognitoSettings cognitoSettings = new CognitoSettings(LogIn.this);
+
+                CognitoUser thisUser = cognitoSettings.getUserPool().getUser(String.valueOf(name));
+
+                thisUser.getSessionInBackground(authenticationHandler);
+
             }
         });
     }

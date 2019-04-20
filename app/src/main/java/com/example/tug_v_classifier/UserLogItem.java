@@ -1,6 +1,7 @@
 package com.example.tug_v_classifier;
 
-import java.util.ArrayList;
+
+
 
 public class UserLogItem {
 

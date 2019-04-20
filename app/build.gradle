@@ -52,6 +52,10 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.google.android.gms:play-services-places:16.0.0'
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
+    implementation 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.6.29'
+    implementation 'com.amazonaws:aws-android-sdk-core:2.6.31'
+    implementation 'com.amazonaws:aws-android-sdk-ddb:2.6.31'
+    implementation 'com.amazonaws:aws-android-sdk-ddb-document:2.6.31'
 
     //implementation 'com.google.android.libraries.places:places-compat:1.1.0'
 
