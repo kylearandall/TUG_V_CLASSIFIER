@@ -71,14 +71,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/localswitch"
-        android:text="@android:string/search_go" />
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginEnd="120dp"
+        android:background="@drawable/custom_button"
+        android:text="@android:string/search_go"
+        android:textAllCaps="true"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/searchagainbutton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_alignParentBottom="true"
-        android:text="@string/goback" />
+        android:layout_marginBottom="68dp"
+        android:text="back"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/custom_button"
+        android:textAllCaps="true"
+        android:textColor="#FFFFFF"
+        android:textSize="22dp" />
 
     <Switch
         android:id="@+id/localswitch"
