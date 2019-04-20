@@ -1,9 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UserLogSearch">
 
-</android.support.constraint.ConstraintLayout>
+    <Space
+        android:id="@+id/topspace"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="47dp"
+        app:srcCompat="@drawable/textron"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        android:layout_below="@+id/topspace"/>
+
+    <TextView
+        android:id="@+id/searchuserlogheader"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_below="@+id/logo"
+        android:layout_alignParentStart="true"
+        android:text="@string/searchuserlogheader"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/searchnameinput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/searchbutton"
+        android:inputType="textPersonName"
+        android:layout_below="@+id/searchuserlogheader"/>
+
+    <EditText
+        android:id="@+id/locationsearchinput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/locationsearch"
+        android:inputType="textPersonName"
+        android:layout_below="@+id/searchnameinput"/>
+
+    <EditText
+        android:id="@+id/datesearchinput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/datesearch"
+        android:inputType="date"
+        android:layout_below="@+id/locationsearchinput"/>
+
+    <TextView
+        android:id="@+id/searchresultstatusheader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/resultstatussearch"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_below="@+id/datesearchinput"/>
+
+    <Button
+        android:id="@+id/searchbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/localswitch"
+        android:text="@android:string/search_go" />
+
+    <Button
+        android:id="@+id/searchagainbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/goback" />
+
+    <Switch
+        android:id="@+id/localswitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/classsearchcontainter"
+        android:text="@string/localsearchswitchtext"
+        android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/resultstatusspinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchresultstatusheader"
+        >
+
+
+    </Spinner>
+
+    <LinearLayout
+        android:id="@+id/classsearchcontainter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/resultstatusspinner"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <Spinner
+            android:id="@+id/setclassspinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"/>
+
+        <Spinner
+            android:id="@+id/recclassspinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

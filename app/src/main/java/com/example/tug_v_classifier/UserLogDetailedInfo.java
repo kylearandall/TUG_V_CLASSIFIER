@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -83,7 +82,7 @@ public class UserLogDetailedInfo extends AppCompatActivity {
         otherTextRow=(TableRow)findViewById(R.id.othertextrow);
 
         seePics = (Button)findViewById(R.id.displaypicsbutton);
-        goBack=(Button)findViewById(R.id.gobackbutton);
+        goBack=(Button)findViewById(R.id.searchagainbutton);
 
         userLogUserName=userLogItem.getUserName();
         userNameTV.setText(userLogUserName);

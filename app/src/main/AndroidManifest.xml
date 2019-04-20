@@ -31,7 +31,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UserLogSearch"></activity>
+        <activity android:name=".UserLogSearchResults"></activity>
+        <activity android:name=".UserLogSearch" />
 
         <service
             android:name=".PictureConverter"

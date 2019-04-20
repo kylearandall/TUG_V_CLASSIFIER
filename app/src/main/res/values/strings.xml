@@ -96,4 +96,34 @@
     <string name="close">Close</string>
     <string name="showlocalonly">Show User Logs from this Device Only</string>
     <string name="userlogemptytext">Error Loading User Logs from Cloud Database.</string>
+    <string name="searchuserlogheader">User Log Search</string>
+    <string name="usernamesearch">Search By Username</string>
+    <string name="locationsearch">Search By Location</string>
+    <string name="datesearch">Search By Date</string>
+    <string name="resultstatussearch">Search by Result Status</string>
+    <string name="setclasssearch">Search By Set Class</string>
+    <string name="recclasssearch">Search By Recommended Class</string>
+    <string name="localsearchswitchtext">Search User Logs From this Device Only</string>
+    <string-array name="resultstatusspinner">
+        <item>Search By Result Status</item>
+        <item>Correct</item>
+        <item>Incorrect</item>
+        <item>Inconclusive</item>
+    </string-array>
+    <string-array name="setclassspinner">
+        <item>Search By Set Class</item>
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+    </string-array>
+    <string-array name="recclassspinner">
+        <item>Search By Rec. Class</item>
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+    </string-array>
 </resources>

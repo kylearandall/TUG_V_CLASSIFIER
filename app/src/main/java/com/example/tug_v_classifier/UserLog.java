@@ -32,7 +32,7 @@ public class UserLog extends AppCompatActivity {
         setContentView(R.layout.activity_user_log);
         Bundle getUserName = getIntent().getExtras();
         userName=getUserName.getString("username");
-        mainMenu=(Button)findViewById(R.id.gobackbutton);
+        mainMenu=(Button)findViewById(R.id.searchagainbutton);
         search = (Button)findViewById(R.id.searchbutton);
         userLogItemDBAdapter = UserLogItemDBAdapter.getUserLogItemDBAdapterInstance(this);
         localSwitch=(Switch)findViewById(R.id.localswitch);
@@ -83,7 +83,11 @@ public class UserLog extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle searchInfo = new Bundle();
+                searchInfo.putString("username", userName);
                 Intent goToSearch = new Intent(UserLog.this, UserLogSearch.class);
+                goToSearch.putExtras(searchInfo);
+                startActivity(goToSearch);
             }
         });
 
