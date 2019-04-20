@@ -57,7 +57,9 @@
             android:text="@string/launchbutton"
             android:textColor="#FFFFFF"
             android:textSize="25dp"
-            android:background="@drawable/custom_button"/>
+            android:background="@drawable/custom_button"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="70dp"/>
 
         <Space
             android:id="@+id/lowspace"

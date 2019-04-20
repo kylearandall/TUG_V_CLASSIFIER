@@ -35,12 +35,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="0dp"
         android:layout_marginBottom="39dp"
-        android:text="@string/returntomenu"
+        android:text="@string/mainmenu"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
-        android:background="@drawable/custom_button"/>
+        android:background="@drawable/custom_button"
+        android:layout_marginStart="90dp"
+        android:layout_marginEnd="90dp"/>
 
     <Button
         android:id="@+id/searchbutton"
@@ -48,10 +49,12 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/searchagainbutton"
         android:layout_marginBottom="13dp"
-        android:text="@string/searchbutton"
+        android:text="search"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
-        android:background="@drawable/custom_button"/>
+        android:background="@drawable/custom_button_turquoise"
+        android:layout_marginStart="90dp"
+        android:layout_marginEnd="90dp"/>
 
     <ListView
         android:id="@+id/userloglist"
