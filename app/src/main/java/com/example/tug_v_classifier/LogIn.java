@@ -1,6 +1,7 @@
 package com.example.tug_v_classifier;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +21,7 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.Authentic
 
 public class LogIn extends AppCompatActivity {
 
-    private Button signIn, test;
+    private Button signIn, test, createUser;
     private EditText userName, password;
     private String name;
     private UserLogItemDBAdapter userLogItemDBAdapter;
@@ -37,7 +38,11 @@ public class LogIn extends AppCompatActivity {
         userName = (EditText)findViewById(R.id.usernameinpnut);
         password = (EditText)findViewById(R.id.passwordinput);
         test = (Button)findViewById(R.id.deletebutton);
+        createUser = (Button)findViewById(R.id.createuserbutton);
         userLogItemDBAdapter = UserLogItemDBAdapter.getUserLogItemDBAdapterInstance(this);
+        CognitoSettings cognitoSettings = new CognitoSettings(LogIn.this);
+        Bundle sendName = new Bundle();
+        Intent login = new Intent(LogIn.this, MainMenu.class);
 
         test.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,14 +51,19 @@ public class LogIn extends AppCompatActivity {
             }
         });
 
+        createUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goCreateUser = new Intent(LogIn.this, CreateUser.class);
+                startActivity(goCreateUser);
+            }
+        });
+
         final AuthenticationHandler authenticationHandler = new AuthenticationHandler() {
             @Override
             public void onSuccess(CognitoUserSession userSession, CognitoDevice newDevice) {
                 Log.i(TAG, "Login Secussful!");
-                Bundle sendName = new Bundle();
                 sendName.putString("username", name);
-
-                Intent login = new Intent(LogIn.this, MainMenu.class);
                 login.putExtras(sendName);
                 startActivity(login);
 
@@ -62,9 +72,7 @@ public class LogIn extends AppCompatActivity {
             @Override
             public void getAuthenticationDetails(AuthenticationContinuation authenticationContinuation, String userId) {
                 AuthenticationDetails authenticationDetails = new AuthenticationDetails(userId, String.valueOf(password.getText()), null);
-
                 authenticationContinuation.setAuthenticationDetails(authenticationDetails);
-
                 authenticationContinuation.continueTask();
 
             }
@@ -98,9 +106,6 @@ public class LogIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 name = userName.getText().toString();
-
-
-                CognitoSettings cognitoSettings = new CognitoSettings(LogIn.this);
 
                 CognitoUser thisUser = cognitoSettings.getUserPool().getUser(String.valueOf(name));
 

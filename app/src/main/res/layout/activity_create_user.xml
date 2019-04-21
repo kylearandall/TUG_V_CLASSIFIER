@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateUser">
+
+    <EditText
+        android:id="@+id/usernameinput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/createaccountusername"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/emailinput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/usernameinput"
+        android:ems="10"
+        android:hint="@string/emailinput"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/passwordinput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/emailinput"
+        android:ems="10"
+        android:hint="@string/loginpassword"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/registerbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/passwordinput"
+        android:text="@string/register" />
+</RelativeLayout>

@@ -7,6 +7,13 @@
     tools:context=".LogIn">
 
 
+    <Button
+        android:id="@+id/createuserbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/createuserbutton"
+        android:layout_alignParentBottom="true"/>
+
     <EditText
         android:id="@+id/usernameinpnut"
         android:layout_width="303dp"

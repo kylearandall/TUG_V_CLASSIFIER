@@ -104,6 +104,12 @@
     <string name="setclasssearch">Search By Set Class</string>
     <string name="recclasssearch">Search By Recommended Class</string>
     <string name="localsearchswitchtext">Search User Logs From this Device Only</string>
+    <string name="createaccountusername">User Name</string>
+    <string name="emailinput">Email</string>
+    <string name="register">Register</string>
+    <string name="createuserbutton">Create User</string>
+    <string name="verficicationcode">Enter code</string>
+    <string name="verify">Verify</string>
     <string-array name="resultstatusspinner">
         <item>Search By Result Status</item>
         <item>Correct</item>
