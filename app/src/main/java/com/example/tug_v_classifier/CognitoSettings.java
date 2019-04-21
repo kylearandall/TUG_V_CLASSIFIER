@@ -13,6 +13,8 @@ public class CognitoSettings {
     private String clientSecret = "rboduv5rnb51enttlhvspuikv7d2l1q642tc9p81u6gaa0cbvrf";
     private Regions cognitoRegion = Regions.US_EAST_2;
 
+    private String identityPoolId = "us-east-2:a3ae2aa8-1f17-4a27-9ffc-7a19ba199b3d";
+
     private Context context;
 
     public CognitoSettings(Context context){

@@ -220,7 +220,7 @@ public class UserLogItemDBAdapter {
 
     public Cursor getCursorForUserLogsNotUploaded(){
         int notUploaded = 0;
-        Cursor cursor=mSQLiteDB.query(TABLE_USERLOGLOCAL, new String[]{COLUMN_ID, COLUMN_USERNAME, COLUMN_DATE, COLUMN_LOCATION, COLUMN_RECCLASS, COLUMN_SETCLASS, COLUMN_RESULTSTATUS, COLUMN_PICTURESTRINGS,COLUMN_ADMINDAPPROVEDNAME, COLUMN_OTHERUNKNOWNTEXT, COLUMN_FACTORS}, COLUMN_UPLOADED+" LIKE '%"+notUploaded+"%", null, null, null, null, null);
+        Cursor cursor=mSQLiteDB.query(TABLE_USERLOGLOCAL, new String[]{COLUMN_ID, COLUMN_USERNAME, COLUMN_DATE, COLUMN_LOCATION, COLUMN_RECCLASS, COLUMN_SETCLASS, COLUMN_RESULTSTATUS, COLUMN_PICTURESTRINGS,COLUMN_ADMINDAPPROVEDNAME, COLUMN_OTHERUNKNOWNTEXT, COLUMN_FACTORS}, COLUMN_UPLOADED+" LIKE '%"+notUploaded+"%'", null, null, null, null, null);
         return cursor;
     }
 
@@ -247,7 +247,11 @@ public class UserLogItemDBAdapter {
 
     public boolean insertCorrect(String userName, String date, String location, String towClass, String pictureStrings){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_ID, userName+"_"+date);
+        String userNameNoSpaces = userName.replaceAll("\\s+","");
+        String dateNoSpaces=date.replaceAll("\\s+","");
+        String dateNoSpecialChar=dateNoSpaces.replaceAll(":","");
+        String userID = userNameNoSpaces+dateNoSpecialChar;
+        contentValues.put(COLUMN_ID, userID);
         contentValues.put(COLUMN_USERNAME, userName);
         contentValues.put(COLUMN_DATE, date);
         contentValues.put(COLUMN_LOCATION, location);
@@ -263,7 +267,11 @@ public class UserLogItemDBAdapter {
 
     public boolean insertOverride(String userName, String date, String location, String recClass, String setClass, String resultStatus, String pictureStrings, String adminUserName, String otherUnknown, String factors){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_ID, userName+"_"+date);
+        String userNameNoSpaces = userName.replaceAll("\\s+","");
+        String dateNoSpaces=date.replaceAll("\\s+","");
+        String dateNoSpecialChar=dateNoSpaces.replaceAll(":","");
+        String userID = userNameNoSpaces+dateNoSpecialChar;
+        contentValues.put(COLUMN_ID, userID);
         contentValues.put(COLUMN_USERNAME, userName);
         contentValues.put(COLUMN_DATE, date);
         contentValues.put(COLUMN_LOCATION, location);
@@ -286,8 +294,7 @@ public class UserLogItemDBAdapter {
         return mSQLiteDB.delete(TABLE_USERLOGLOCAL, COLUMN_USERNAME+" = "+username, null)>0;
     }
 
-    public boolean uploadedLog(String username, String date){
-        String logID = username+"_"+date;
+    public boolean uploadedLog(String logID){
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_UPLOADED, 1);
         return mSQLiteDB.update(TABLE_USERLOGLOCAL, contentValues, COLUMN_ID+" = "+logID, null)>0;

@@ -38,6 +38,7 @@ public class DynamoDBAccess {
         dbClient.setRegion(Region.getRegion(Regions.US_EAST_2));
 
         dbTable = Table.loadTable(dbClient, DYNAMODB_TABLE);
+
     }
 
     public static synchronized DynamoDBAccess getInstance(Context context){
@@ -76,12 +77,20 @@ public class DynamoDBAccess {
         doc.put("resultStatus", userLogItem.getResultStatus());
         if(userLogItem.getAdminApprovedName()!=null){
             doc.put("adminApprovedName", userLogItem.getAdminApprovedName());
+        }else{
+            doc.put("adminApprovedName", "n/a");
         }
         if(userLogItem.getOtherUnknownText()!=null){
-            doc.put("otherUnknownText", userLogItem.getOtherUnknownText());
+            if(!userLogItem.getOtherUnknownText().isEmpty()){
+                doc.put("otherUnknownText", userLogItem.getOtherUnknownText());
+            }
+        }else{
+            doc.put("otherUnknownText", "n/a");
         }
         if(userLogItem.getFactors()!=null){
             doc.put("factors", userLogItem.getFactors());
+        }else{
+            doc.put("factors", "n/a");
         }
 
         PutItemOperationConfig putItemOperationConfig = new PutItemOperationConfig();

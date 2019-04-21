@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 public class MainMenu extends AppCompatActivity {
     Button classifier, userLog;
     private String name;
+    private UserLogItemDBAdapter userLogItemDBAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +21,19 @@ public class MainMenu extends AppCompatActivity {
         Intent getName = getIntent();
         Bundle sentName= getName.getExtras();
         name = sentName.getString("username");
+
+        userLogItemDBAdapter = UserLogItemDBAdapter.getUserLogItemDBAdapterInstance(this);
+        ArrayList<UserLogItem> allLogs = userLogItemDBAdapter.getAllLocalUserLogs();
+        ArrayList<UserLogItem> logsNotUploaded = new ArrayList<>();
+        for(int i =0; i<allLogs.size();i++){
+            if(allLogs.get(i).isUploaded()==0){
+                logsNotUploaded.add(allLogs.get(i));
+            }
+        }
+        if(logsNotUploaded.size()>0){
+            Intent startUpload = new Intent(MainMenu.this, uploadLogsToCloud.class);
+            startService(startUpload);
+        }
 
 
 
