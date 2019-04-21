@@ -96,6 +96,7 @@
         </activity>
         <activity android:name=".UserLog" />
         <activity android:name=".UserLogDetailedInfo" />
+
     </application>
 
 </manifest>

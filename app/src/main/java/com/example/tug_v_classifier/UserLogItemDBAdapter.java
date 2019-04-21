@@ -31,7 +31,7 @@ public class UserLogItemDBAdapter {
     public static final String COLUMN_FACTORS = "factors"; //data type: String
     public static final String COLUMN_UPLOADED = "uploaded"; //data type: Int (0 or 1) NONNULL
 
-    public static String CREATE_TABLE_USERLOGLOCAL="CREATE TABLE "+TABLE_USERLOGLOCAL+"("+COLUMN_ID+" TEXT PRIMARY KEY, "+
+    public static String CREATE_TABLE_USERLOGLOCAL="CREATE TABLE "+TABLE_USERLOGLOCAL+" ("+COLUMN_ID+" TEXT PRIMARY KEY, "+
             COLUMN_USERNAME+" TEXT NOT NULL, "+COLUMN_DATE+" TEXT NOT NULL, "+COLUMN_LOCATION+" TEXT NOT NULL, "+
             COLUMN_RECCLASS+" TEXT NOT NULL, "+COLUMN_SETCLASS+" TEXT NOT NULL, "+COLUMN_RESULTSTATUS+" TEXT NOT NULL, "+
             COLUMN_PICTURESTRINGS+" TEXT NOT NULL, "+COLUMN_ADMINDAPPROVEDNAME+" TEXT, "+COLUMN_OTHERUNKNOWNTEXT+" TEXT, "+COLUMN_FACTORS+" TEXT, "+COLUMN_UPLOADED+" INTEGER NOT NULL )";
@@ -220,7 +220,7 @@ public class UserLogItemDBAdapter {
 
     public Cursor getCursorForUserLogsNotUploaded(){
         int notUploaded = 0;
-        Cursor cursor=mSQLiteDB.query(TABLE_USERLOGLOCAL, new String[]{COLUMN_ID, COLUMN_USERNAME, COLUMN_DATE, COLUMN_LOCATION, COLUMN_RECCLASS, COLUMN_SETCLASS, COLUMN_RESULTSTATUS, COLUMN_PICTURESTRINGS,COLUMN_ADMINDAPPROVEDNAME, COLUMN_OTHERUNKNOWNTEXT, COLUMN_FACTORS}, COLUMN_UPLOADED+" LIKE '%"+notUploaded+"%'", null, null, null, null, null);
+        Cursor cursor = mSQLiteDB.query(TABLE_USERLOGLOCAL,new String[]{COLUMN_ID,COLUMN_USERNAME,COLUMN_DATE,COLUMN_LOCATION,COLUMN_RECCLASS,COLUMN_SETCLASS,COLUMN_RESULTSTATUS,COLUMN_PICTURESTRINGS,COLUMN_ADMINDAPPROVEDNAME,COLUMN_OTHERUNKNOWNTEXT,COLUMN_FACTORS,COLUMN_UPLOADED}, COLUMN_UPLOADED+" LIKE '%"+notUploaded+"%'",null,null,null,null );
         return cursor;
     }
 
@@ -250,7 +250,8 @@ public class UserLogItemDBAdapter {
         String userNameNoSpaces = userName.replaceAll("\\s+","");
         String dateNoSpaces=date.replaceAll("\\s+","");
         String dateNoSpecialChar=dateNoSpaces.replaceAll(":","");
-        String userID = userNameNoSpaces+dateNoSpecialChar;
+        String dateNoDash = dateNoSpecialChar.replace("-","");
+        String userID = userNameNoSpaces+dateNoDash;
         contentValues.put(COLUMN_ID, userID);
         contentValues.put(COLUMN_USERNAME, userName);
         contentValues.put(COLUMN_DATE, date);
@@ -270,7 +271,8 @@ public class UserLogItemDBAdapter {
         String userNameNoSpaces = userName.replaceAll("\\s+","");
         String dateNoSpaces=date.replaceAll("\\s+","");
         String dateNoSpecialChar=dateNoSpaces.replaceAll(":","");
-        String userID = userNameNoSpaces+dateNoSpecialChar;
+        String dateNoDash = dateNoSpecialChar.replace("-","");
+        String userID = userNameNoSpaces+dateNoDash;
         contentValues.put(COLUMN_ID, userID);
         contentValues.put(COLUMN_USERNAME, userName);
         contentValues.put(COLUMN_DATE, date);
@@ -286,6 +288,22 @@ public class UserLogItemDBAdapter {
         return mSQLiteDB.insert(TABLE_USERLOGLOCAL, null, contentValues)>0;
     }
 
+    public boolean reinsertUserLog(UserLogItem userLogItem){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_ID, userLogItem.getUserLogID());
+        contentValues.put(COLUMN_USERNAME, userLogItem.getUserName());
+        contentValues.put(COLUMN_DATE, userLogItem.getDate());
+        contentValues.put(COLUMN_LOCATION, userLogItem.getLocation());
+        contentValues.put(COLUMN_RECCLASS, userLogItem.getRecClass());
+        contentValues.put(COLUMN_SETCLASS, userLogItem.getSetClass());
+        contentValues.put(COLUMN_RESULTSTATUS, userLogItem.getResultStatus());
+        contentValues.put(COLUMN_PICTURESTRINGS, userLogItem.getPictureStrings());
+        contentValues.put(COLUMN_ADMINDAPPROVEDNAME, userLogItem.getAdminApprovedName());
+        contentValues.put(COLUMN_UPLOADED, 1);
+        return mSQLiteDB.insert(TABLE_USERLOGLOCAL, null, contentValues)>0;
+    }
+
+
     public long insert(ContentValues contentValues){
         return mSQLiteDB.insert(TABLE_USERLOGLOCAL, null, contentValues);
     }
@@ -294,10 +312,13 @@ public class UserLogItemDBAdapter {
         return mSQLiteDB.delete(TABLE_USERLOGLOCAL, COLUMN_USERNAME+" = "+username, null)>0;
     }
 
-    public boolean uploadedLog(String logID){
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_UPLOADED, 1);
-        return mSQLiteDB.update(TABLE_USERLOGLOCAL, contentValues, COLUMN_ID+" = "+logID, null)>0;
+    public boolean deleteUserLog(UserLogItem userLogItem){
+        return mSQLiteDB.delete(TABLE_USERLOGLOCAL, COLUMN_ID+" = "+userLogItem.getUserLogID(), null)>0;
+    }
+
+    public void uploadedLog(String logID){
+        mSQLiteDB.execSQL("UPDATE "+TABLE_USERLOGLOCAL+" SET "+COLUMN_UPLOADED+ " = 1 WHERE "+COLUMN_ID+" = "+logID);
+
     }
 
 

@@ -38,12 +38,7 @@ public class LogIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
-        AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
-            @Override
-            public void onComplete(AWSStartupResult awsStartupResult) {
-                Log.d(TAG, "AWSMobileClient is instantiated and you are connected to AWS!");
-            }
-        }).execute();
+
 
         userName = (EditText)findViewById(R.id.usernameinpnut);
         password = (EditText)findViewById(R.id.passwordinput);

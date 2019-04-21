@@ -156,6 +156,7 @@ public class Camera2BasicFragment extends Fragment
                     cameraOpenCloseLock.release();
                     cameraDevice = currentCameraDevice;
                     createCameraPreviewSession();
+                    Log.i(TAG, "Camera opened");
                 }
 
                 @Override
@@ -174,6 +175,7 @@ public class Camera2BasicFragment extends Fragment
                     if (null != activity) {
                         activity.finish();
                     }
+                    Log.i(TAG, "Camera Error");
                 }
             };
 
@@ -353,8 +355,6 @@ public class Camera2BasicFragment extends Fragment
         String dateNoSpaces=date.replaceAll("\\s+","");
         String dateNoSpecialChar=dateNoSpaces.replaceAll(":","");
         fileNamePrefix = userNameNoSpaces+dateNoSpecialChar;
-        Intent startPicConverter = new Intent (getContext(), PictureConverter.class);
-        getContext().startService(startPicConverter);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -753,7 +753,7 @@ public class Camera2BasicFragment extends Fragment
         if(badResults.size()<10){
             badResults.add(textToShow);
         }else{
-            if(counter%3==0) {
+            if(counter%2==0) {
                 Bitmap bitmap2 =textureView.getBitmap(889, 1341);
                 fileDir = saveImagetoInternalStorage(bitmap2);
                 picCounter++;
@@ -764,7 +764,7 @@ public class Camera2BasicFragment extends Fragment
             results.add(textToShow);
         }
         bitmap.recycle();
-        if(results.size()==15){
+        if(results.size()==10){
             runClassifier=false;
             getFinalResult();
             //testing code to test inconclusive use case. Remove before demonstration
