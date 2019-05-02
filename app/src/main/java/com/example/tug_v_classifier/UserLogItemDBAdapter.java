@@ -18,7 +18,7 @@ public class UserLogItemDBAdapter {
     public static final int DB_VERSION=1;
 
     public static final String TABLE_USERLOGLOCAL="table_userloglocal";
-    public static final String COLUMN_ID = "id"; //data type: String NONNULL
+    public static final String COLUMN_ID = "user_id"; //data type: String NONNULL
     public static final String COLUMN_USERNAME = "username"; //data type: String NONNULL
     public static final String COLUMN_DATE = "date"; //data type: String NONNULL
     public static final String COLUMN_LOCATION = "location"; //data type: String NONNULL
@@ -31,7 +31,7 @@ public class UserLogItemDBAdapter {
     public static final String COLUMN_FACTORS = "factors"; //data type: String
     public static final String COLUMN_UPLOADED = "uploaded"; //data type: Int (0 or 1) NONNULL
 
-    public static String CREATE_TABLE_USERLOGLOCAL="CREATE TABLE "+TABLE_USERLOGLOCAL+" ("+COLUMN_ID+" TEXT PRIMARY KEY, "+
+    public static String CREATE_TABLE_USERLOGLOCAL="CREATE TABLE "+TABLE_USERLOGLOCAL+"("+COLUMN_ID+" TEXT PRIMARY KEY, "+
             COLUMN_USERNAME+" TEXT NOT NULL, "+COLUMN_DATE+" TEXT NOT NULL, "+COLUMN_LOCATION+" TEXT NOT NULL, "+
             COLUMN_RECCLASS+" TEXT NOT NULL, "+COLUMN_SETCLASS+" TEXT NOT NULL, "+COLUMN_RESULTSTATUS+" TEXT NOT NULL, "+
             COLUMN_PICTURESTRINGS+" TEXT NOT NULL, "+COLUMN_ADMINDAPPROVEDNAME+" TEXT, "+COLUMN_OTHERUNKNOWNTEXT+" TEXT, "+COLUMN_FACTORS+" TEXT, "+COLUMN_UPLOADED+" INTEGER NOT NULL )";
@@ -313,7 +313,7 @@ public class UserLogItemDBAdapter {
     }
 
     public boolean deleteUserLog(UserLogItem userLogItem){
-        return mSQLiteDB.delete(TABLE_USERLOGLOCAL, COLUMN_ID+" = "+userLogItem.getUserLogID(), null)>0;
+        return mSQLiteDB.delete(TABLE_USERLOGLOCAL, userLogItem.getUserLogID()+" = "+COLUMN_ID, null)>0;
     }
 
     public void uploadedLog(String logID){

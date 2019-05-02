@@ -750,21 +750,23 @@ public class Camera2BasicFragment extends Fragment
                 textureView.getBitmap(ImageClassifier.DIM_IMG_SIZE_X, ImageClassifier.DIM_IMG_SIZE_Y);
         String textToShow = classifier.classifyFrame(bitmap);
         showToast("Classifying");
-        if(badResults.size()<10){
+        if(badResults.size()<6){
             badResults.add(textToShow);
         }else{
-            if(counter%2==0) {
-                Bitmap bitmap2 =textureView.getBitmap(889, 1341);
+
+                Bitmap bitmap2 =textureView.getBitmap(789, 1241);
                 fileDir = saveImagetoInternalStorage(bitmap2);
                 picCounter++;
+                bitmap2.recycle();
 
 
-            }
+
             counter++;
             results.add(textToShow);
+
         }
         bitmap.recycle();
-        if(results.size()==10){
+        if(results.size()==5){
             runClassifier=false;
             getFinalResult();
             //testing code to test inconclusive use case. Remove before demonstration
@@ -883,7 +885,7 @@ public class Camera2BasicFragment extends Fragment
             finalResult = "Inconclusive";
         }
 
-        if(biggest.size()>=18)
+        if(biggest.size()>=3)
             finalResult = biggest.get(0);
         else
             finalResult = "Inconclusive";

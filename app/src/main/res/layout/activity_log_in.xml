@@ -11,8 +11,9 @@
         android:id="@+id/createuserbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:text="@string/createuserbutton"
-        android:layout_alignParentBottom="true"/>
+        android:visibility="invisible" />
 
     <EditText
         android:id="@+id/usernameinpnut"
@@ -93,7 +94,16 @@
         android:id="@+id/deletebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="test" />
+        android:text="test"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/deletebutton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/deletebutton"
+        android:text="test2"
+        android:visibility="invisible" />
 
 
 </RelativeLayout>

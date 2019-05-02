@@ -51,8 +51,8 @@ public class DynamoDBAccess {
     public List<Document> getAllUserLogsFromCloud() {
         ScanOperationConfig scanOperationConfig = new ScanOperationConfig();
         ArrayList<String> attributeList = new ArrayList<>();
-        attributeList.add("id");
-        attributeList.add("userName");
+        attributeList.add("userlogid");
+        attributeList.add("username");
         attributeList.add("date");
         attributeList.add("location");
         attributeList.add("recClass");
@@ -68,8 +68,8 @@ public class DynamoDBAccess {
 
     public Document addUserLogToCloud(UserLogItem userLogItem){
         Document doc = new Document();
-        doc.put("id", userLogItem.getUserLogID());
-        doc.put("userName", userLogItem.getUserName());
+        doc.put("userlogid", userLogItem.getUserLogID());
+        doc.put("username", userLogItem.getUserName());
         doc.put("date", userLogItem.getDate());
         doc.put("location", userLogItem.getLocation());
         doc.put("recClass", userLogItem.getRecClass());

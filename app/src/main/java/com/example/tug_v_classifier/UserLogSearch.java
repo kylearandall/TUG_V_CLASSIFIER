@@ -43,6 +43,7 @@ public class UserLogSearch extends AppCompatActivity {
                 Bundle sendInfoBack = new Bundle();
                 sendInfoBack.putString("username", userName);
                 sendInfoBack.putString("localcheck","0");
+                sendInfoBack.putString("frommenu","0");
                 Intent goBack = new Intent(UserLogSearch.this, UserLog.class);
                 goBack.putExtras(sendInfoBack);
                 startActivity(goBack);

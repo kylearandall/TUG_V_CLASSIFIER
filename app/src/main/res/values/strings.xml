@@ -110,6 +110,9 @@
     <string name="createuserbutton">Create User</string>
     <string name="verficicationcode">Enter code</string>
     <string name="verify">Verify</string>
+    <string name="uploadboxtitle">Upload Images?</string>
+    <string name="no">No</string>
+    <string name="uploadboxmessage">Some User Logs have not been updating to the cloud.\nWould you like to upload them now?\n(Logs not uploaded to the cloud will only be visible on this device)</string>
     <string-array name="resultstatusspinner">
         <item>Search By Result Status</item>
         <item>Correct</item>

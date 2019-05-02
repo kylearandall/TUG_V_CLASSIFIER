@@ -4,7 +4,7 @@
   "CredentialsProvider": {
     "CognitoIdentity": {
       "Default": {
-        "PoolId": "us-east-1:a63bd6af-adc7-4365-b207-1c6708c3455a",
+        "PoolId": "us-east-1:2b314458-003c-4844-9131-9d77a5aebfac",
         "Region": "us-east-1"
       }
     }
@@ -14,13 +14,18 @@
   },
   "S3TransferUtility": {
     "Default": {
-      "Bucket": "tugclassifier-userfiles-mobilehub-697661484",
+      "Bucket": "tugapp-userfiles-mobilehub-1952717818",
+      "Region": "us-east-1"
+    }
+  },
+  "DynamoDBObjectMapper": {
+    "Default": {
       "Region": "us-east-1"
     }
   },
   "PinpointAnalytics": {
     "Default": {
-      "AppId": "28626353cd3f4d6ab05852c232ffd885",
+      "AppId": "5c72301f89f141c2a875b015ba177559",
       "Region": "us-east-1"
     }
   },
@@ -31,7 +36,7 @@
   },
   "UserFileManager": {
     "Default": {
-      "Bucket": "tugclassifier-userfiles-mobilehub-697661484",
+      "Bucket": "tugapp-userfiles-mobilehub-1952717818",
       "Region": "us-east-1"
     }
   }

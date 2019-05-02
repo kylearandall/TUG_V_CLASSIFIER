@@ -37,14 +37,6 @@ public class uploadLogsToCloud extends Service{
         userLogItemDBAdapter = UserLogItemDBAdapter.getUserLogItemDBAdapterInstance(this);
         ArrayList<UserLogItem> allLogs = userLogItemDBAdapter.getAllLocalUserLogs();
 
-        AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
-            @Override
-            public void onComplete(AWSStartupResult awsStartupResult) {
-                Log.d(TAG, "AWSMobileClient is instantiated and you are connected to AWS!");
-                awsConnected=true;
-            }
-        }).execute();
-
         logsToUpload = new ArrayList<>();
         for(int i =0; i<allLogs.size();i++){
             if(allLogs.get(i).isUploaded()==0){
@@ -70,20 +62,7 @@ public class uploadLogsToCloud extends Service{
         @Override
         protected void onPostExecute(String s) {
             Log.i(TAG, "User Log Upload Complete");
-            if(awsConnected){
-                for(int i= 0;i<logsToUpload.size(); i++){
-                    Log.i(TAG, "Starting Image Upload for Log "+(i+1)+" out of "+logsToUpload.size());
-                    for(int j=0;j<5;j++){
-                        Log.i(TAG, "Uploading image "+(j+1)+" of 5 for Log "+(i+1)+" out of "+logsToUpload.size());
-                        uploadImage(logsToUpload.get(i), j);
-
-                    }
-                    userLogItemDBAdapter.uploadedLog(logsToUpload.get(i).getUserLogID());
-                }
-            }else{
-                Log.i(TAG, "Error: Picture Upload Skipped. AWS Not Connected");
-                stopSelf();
-            }
+            stopSelf();
         }
     }
 
@@ -93,49 +72,5 @@ public class uploadLogsToCloud extends Service{
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    private void uploadImage(UserLogItem userLog, int i){
-        Log.i(TAG, "Picture Upload Start");
-        TransferUtility transferUtility =
-                TransferUtility.builder()
-                        .context(getApplicationContext())
-                        .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
-                        .s3Client(new AmazonS3Client(AWSMobileClient.getInstance().getCredentialsProvider()))
-                        .build();
-
-        TransferObserver uploadObserver = transferUtility.upload("user-log-photos/"+userLog.getUserLogID()+i+".jpg",new File(userLog.getPictureStrings(),i+".jpg"));
-
-
-        uploadObserver.setTransferListener(new TransferListener() {
-            @Override
-            public void onStateChanged(int id, TransferState state) {
-                if(TransferState.COMPLETED == state){
-                    if(i==4){
-                        Log.d(TAG, "Picture Upload Completed");
-                        Log.d(TAG, "Service Ending");
-                        stopSelf();
-
-                    }
-                }
-            }
-
-            @Override
-            public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
-                float percentDonef = ((float) bytesCurrent / (float) bytesTotal)*100;
-                int percentDone = (int)percentDonef;
-
-                Log.d(TAG, "ID:" + id + " bytesCurrent: " + bytesCurrent
-                        + " bytesTotal: " + bytesTotal + " " + percentDone + "%");
-
-            }
-
-            @Override
-            public void onError(int id, Exception ex) {
-                Log.d(TAG, "Error uploading pic. ID: "+id);
-
-            }
-        });
-
-
-    }
 
 }

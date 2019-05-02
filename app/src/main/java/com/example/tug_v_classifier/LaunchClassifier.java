@@ -67,6 +67,7 @@ public class LaunchClassifier extends AppCompatActivity {
 
         places = new ArrayList<>();
 
+        //Insert API Key Below
         Places.initialize(getApplicationContext(), "AIzaSyCiUDYUKsWDnDfWjNkmuYjpwq4jfBYQBRs");
         placesClient = Places.createClient(this);
 
