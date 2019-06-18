@@ -750,7 +750,7 @@ public class Camera2BasicFragment extends Fragment
                 textureView.getBitmap(ImageClassifier.DIM_IMG_SIZE_X, ImageClassifier.DIM_IMG_SIZE_Y);
         String textToShow = classifier.classifyFrame(bitmap);
         showToast("Classifying");
-        if(badResults.size()<6){
+        if(badResults.size()<7){
             badResults.add(textToShow);
         }else{
 
@@ -766,7 +766,7 @@ public class Camera2BasicFragment extends Fragment
 
         }
         bitmap.recycle();
-        if(results.size()==5){
+        if(results.size()==10){
             runClassifier=false;
             getFinalResult();
             //testing code to test inconclusive use case. Remove before demonstration
