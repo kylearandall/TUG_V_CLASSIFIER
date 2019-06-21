@@ -76,13 +76,7 @@
             android:layout_height="match_parent"
             android:layout_weight="45" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/textron"
-            app:srcCompat="@drawable/textron"
-            android:layout_weight="10"/>
+
 
         <Space
             android:layout_width="match_parent"
